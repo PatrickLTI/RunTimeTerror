@@ -1,12 +1,12 @@
 package com.patrick.rs.BarberShop.services;
 
+//import com.patrick.rs.BarberShop.model.User;
 //import com.patrick.rs.BarberShop.repositories.UserRepo;
-//import com.patrick.rs.BarberShop.models.User;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.stereotype.Service;
 //import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.web.server.ResponseStatusException;
+//import org.springframework.http.HttpStatus;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.stereotype.Service;
+//import org.springframework.web.server.ResponseStatusException;
 //
 //import javax.transaction.Transactional;
 //import java.util.List;
@@ -62,7 +62,7 @@ package com.patrick.rs.BarberShop.services;
 //            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The phone number is already registered");
 //        } else {
 //            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//            user.setPasswordEncrypted(passwordEncoder.encode(user.getPasswordRaw()));
+//            user.setPassword(passwordEncoder.encode(user.getPassword()));
 //            user.setPhoneNumber(user.getPhoneNumber().replace("-", "").replace(" ", ""));
 //            userRepo.save(user);
 //        }

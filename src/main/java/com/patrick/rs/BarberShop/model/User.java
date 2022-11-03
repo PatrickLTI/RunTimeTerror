@@ -2,11 +2,7 @@ package com.patrick.rs.BarberShop.model;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -33,6 +29,7 @@ public class User {
 	@Column(name = "phoneNumber", nullable = false)
 	private String phoneNumber;
 
+	@Transient
 	@NotBlank(message = "Password should not be blank")
 	@Size(min = 5, max = 20, message = "Password must be between 5 - 20 characters")
 	@Column(name = "confirmPassword", nullable = false)

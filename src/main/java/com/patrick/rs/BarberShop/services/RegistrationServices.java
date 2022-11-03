@@ -1,4 +1,4 @@
-package com.patrick.rs.BarberShop.service;
+package com.patrick.rs.BarberShop.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

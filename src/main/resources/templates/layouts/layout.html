@@ -1,13 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head>
+<head >
     <meta charset="ISO-8859-1">
     <title>Welcome to Exam One of Programming III</title>
     <link rel="stylesheet" href="/webjars/bootstrap/5.2.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/styles.css">
 
     <style>
+        html {
+            position: relative;
+            min-height: 100%;
+            padding-bottom:160px;
+        }
+        body {
+            margin-bottom: 160px;
+        }
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
         a.nav-link {
             color: #edd881 !important;
             border: 1px solid rgba(0, 0, 0, 0);
@@ -24,6 +38,7 @@
 
         a.border:hover {
             transform: scale(1.07);
+
         }
     </style>
 </head>
@@ -53,7 +68,7 @@
         <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2 fs-4 text-uppercase d-xl-flex">
             <ul class="navbar-nav text-center">
                 <li class="nav-item active" th:if="${#request.userPrincipal == null}">
-                    <a class="nav-link" th:href="@{/register}">sign-up</a>
+                    <a class="nav-link" th:href="@{/registration}">sign-up</a>
                 </li>
                 <li class="nav-item active" th:if="${#request.userPrincipal == null}">
                     <a class="nav-link" th:href="@{/login}">log in</a>
@@ -64,7 +79,7 @@
             </ul>
             <ul class="navbar-nav flex-grow-1 justify-content-end">
                 <li class="nav-item">
-                    <a class="nav-link border mx-4 fw-bold" th:href="@{/reserve}">Reserve now</a>
+                    <a class="nav-link border mx-4" th:href="@{/reserve}">Book an appointment</a>
                 </li>
             </ul>
         </div>
@@ -73,7 +88,7 @@
 <!-- /Navbar -->
 <section layout:fragment="content"></section>
 
-<footer class="text-white text-center my-5 bg-dark container">
+<footer class="py-3 text-white text-center bg-dark bg-opacity-50 border-top border-dark border-3">
     Xpression Kutz<br>
     947 Jerry Roads, South Pedro<br>
     WY 03455
