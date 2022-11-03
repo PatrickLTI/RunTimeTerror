@@ -73,13 +73,13 @@ public class AppController {
         }
     }
 
-	@GetMapping("/bookappointment")
+	@GetMapping("/appointment")
 	public String bookAppointment(Appointment appointment)
 	{
 		return "appointment";	
 	}
 	
-	@PostMapping("/bookappointment")
+	@PostMapping("/appointment")
 	public String submitForm(@Valid Appointment appointment, BindingResult bindingResult, Model model) {
 		if(bindingResult.hasErrors()) 
 		{

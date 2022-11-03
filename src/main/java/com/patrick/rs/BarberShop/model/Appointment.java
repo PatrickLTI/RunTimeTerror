@@ -43,9 +43,9 @@ public class Appointment {
 		
 		private Timestamp createdAt = new Timestamp(System.currentTimeMillis());
 		
-		@ManyToOne
-		@JoinColumn(name="userid", nullable= false)
-        private User user;
+//		@ManyToOne
+//		@JoinColumn(name="id", nullable= false)
+//        private User user;
 		
 	
 		public Long getId() {
