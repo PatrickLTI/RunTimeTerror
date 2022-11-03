@@ -5,21 +5,40 @@
     <meta charset="ISO-8859-1">
     <title>Welcome to Exam One of Programming III</title>
     <link rel="stylesheet" href="/webjars/bootstrap/5.2.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
 
-    <link rel="stylesheet" th:href="@{css/styles.css}">
+    <style>
+        a.nav-link {
+            color: #edd881 !important;
+            border: 1px solid rgba(0, 0, 0, 0);
+            transition: all 250ms;
+            margin-right: 20px;
+            margin-left: 20px;
+        }
+
+        a.nav-link:hover {
+            color: white !important;
+            box-sizing: border-box;
+            border: 1px solid #edd881 !important;
+        }
+
+        a.border:hover {
+            transform: scale(1.07);
+        }
+    </style>
 </head>
 <body>
 
 <!-- Navbar -->
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-center mt-3 bg-opacity-50">
+    <nav class="navbar navbar-expand-xl navbar-dark text-center bg-dark bg-opacity-50 pt-3">
         <div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0 justify-content-end fs-4 text-uppercase">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav text-center">
                 <li class="nav-item active ">
-                    <a class="nav-link" href="#">home</a>
+                    <a class="nav-link" th:href="@{/}">home</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">price</a>
+                    <a class="nav-link" th:href="@{/pricing}">pricing</a>
                 </li>
             </ul>
         </div>
@@ -32,18 +51,21 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
-        <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2 fs-4 text-uppercase row">
-            <ul class="navbar-nav text-center col">
-                <li class="nav-item active">
-                    <a class="nav-link" href="@{/register}">sign-up</a>
+        <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2 fs-4 text-uppercase d-xl-flex">
+            <ul class="navbar-nav text-center">
+                <li class="nav-item active" th:if="${#request.userPrincipal == null}">
+                    <a class="nav-link" th:href="@{/register}">sign-up</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="@{/login}">login</a>
+                <li class="nav-item active" th:if="${#request.userPrincipal == null}">
+                    <a class="nav-link" th:href="@{/login}">log in</a>
+                </li>
+                <li class="nav-item active" th:if="${#request.userPrincipal}">
+                    <a class="nav-link" th:href="@{/logout}">log out</a>
                 </li>
             </ul>
-            <ul class="navbar-nav col-auto">
+            <ul class="navbar-nav flex-grow-1 justify-content-end">
                 <li class="nav-item">
-                    <a class="nav-link border mx-4" href="@{/reserve}">Reserve now</a>
+                    <a class="nav-link border mx-4 fw-bold" th:href="@{/reserve}">Reserve now</a>
                 </li>
             </ul>
         </div>
@@ -52,6 +74,11 @@
 <!-- Navbar -->
 <section layout:fragment="content"></section>
 
+<footer class="text-white text-center my-5 bg-dark container">
+    Xpression Kutz<br>
+    947 Jerry Roads, South Pedro<br>
+    WY 03455
+</footer>
 
 <!--boot strap javascript  -->
 <script type="text/javascript" src="/webjars/jquery/3.6.1/jquery.min.js"></script>
