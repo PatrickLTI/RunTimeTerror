@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AppointmentRepo extends JpaRepository<Appointment, Long> {
-   public Optional<List<Appointment>> findAllByUserId(long userId);
+   //public Optional<List<Appointment>> findAllByUserId(long userId);
 
    public Optional<List<Appointment>> findAllByAppDate(Date date);
 
-   public void deleteAllByUserId(long userId);
+//   public void deleteAllByUserId(long userId);
 
 }

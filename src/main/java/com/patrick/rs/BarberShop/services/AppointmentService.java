@@ -43,9 +43,9 @@ public class AppointmentService {
     * @param userId the id of the user
     * @return Appointment | null
     */
-   public List<Appointment> findByUserId(long userId) {
-       return appointmentRepo.findAllByUserId(userId).orElse(null);
-   }
+//   public List<Appointment> findByUserId(long userId) {
+//       return appointmentRepo.findAllByUserId(userId).orElse(null);
+//   }
 
 
    /**
