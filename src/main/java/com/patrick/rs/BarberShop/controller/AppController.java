@@ -11,4 +11,12 @@ public class AppController {
 		return "index";	
 	}
 
+	@GetMapping("/dashboard")
+	public String showDashboard(){
+		return "userdashboard";
+	}
+	@GetMapping("/calendar")
+	public String calendar(){
+		return "calendar";
+	}
 }

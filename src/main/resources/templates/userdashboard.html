@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/header}" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+    <link rel="stylesheet"
+          href="/webjars/bootstrap/5.2.2/css/bootstrap.min.css">
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="/webjars/bootstrap/js/bootstrap.min.js">
+    </script>
+    <link rel="stylesheet" th:href="@{/css/calendar.css}">
+</head>
+<!--<div th:replace="calendar::calendar">Calendar</div>-->
+<body>
+<div layout:fragment="content" class="container">
+    <form th:action="@{/dashboard}" method="post">
+    </form>
+    <!--calendar-->
+    <div style="text-align: -webkit-center">
+        <div class="light calendar mt-5 d-grid align-items-center">
+            <div class="calendar-header">
+                <span class="month-picker" id="month-picker">November</span>
+                <div class="year-picker">
+                <span class="year-change" id="prev-year">
+                    <pre><</pre>
+                </span>
+                    <span id="year">2022</span>
+                    <span class="year-change" id="next-year">
+                    <pre>></pre>
+                </span>
+                </div>
+            </div>
+            <div class="calendar-body">
+                <div class="calendar-week-day">
+                    <div>Sun</div>
+                    <div>Mon</div>
+                    <div>Tue</div>
+                    <div>Wed</div>
+                    <div>Thu</div>
+                    <div>Fri</div>
+                    <div>Sat</div>
+                </div>
+                <div class="calendar-days"></div>
+            </div>
+            <div class="calendar-footer">
+                <!--        <div class="toggle">-->
+                <!--            <span>Dark Mode</span>-->
+                <!--            <div class="dark-mode-switch">-->
+                <!--                <div class="dark-mode-switch-ident"></div>-->
+                <!--            </div>-->
+                <!--        </div>-->
+            </div>
+            <div class="month-list"></div>
+        </div>
+
+        <script th:src="@{/js/calendar.js}"></script>
+    </div>
+    <!--    upcoming appointment-->
+    <div class="mt-5">
+        <nav class="navbar bg-light">
+            <div class="container-fluid justify-content-center">
+                <a class="navbar-brand fw-bold mb-1" href="#">
+                    <img src="images/logoV1.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-">
+                    Upcoming Appointment
+                </a>
+            </div>
+        </nav>
+        <table class="table align-middle mb-0 bg-white">
+            <thead class="bg-light">
+            <tr>
+                <th>Client Name</th>
+                <th>Appointment ID</th>
+                <th>Appintment Date</th>
+                <th>Appintment Time</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="appoint:${listAppoints}">
+                <td th:text="${appoint.name}">
+                    <div class="d-flex align-items-center">
+                        <p class="fw-bold mb-1"> Client Name</p>
+                    </div>
+                </td>
+                <td th:text="${appoint.id}">
+                    <p class="fw-normal mb-1">Appointment ID</p>
+                </td>
+                <td th:text="${appoint.date_time}">
+                    <p class="fw-normal mb-1">Appointment Date</p>
+                </td>
+                <td th:text="${appoint.app_time}">
+                    <p class="fw-normal mb-1">Appointment Time</p>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-link btn-sm btn-rounded">
+                        <a th:href="@{'/edit_appoint/' + ${appoint.id}}">Edit</a>
+                        &nbsp;&nbsp;&nbsp; <a th:href="@{'/delete_appoint/' + ${appoint.id}}">Delete</a>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--    past appointment-->
+    <div class="mt-5">
+        <nav class="navbar bg-light">
+            <div class="container-fluid justify-content-center">
+                <a class="navbar-brand fw-bold mb-1" href="#">
+                    <img src="images/logoV1.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-">
+                    Past Appointment
+                </a>
+            </div>
+        </nav>
+        <table class="table align-middle mb-0 bg-white">
+            <thead class="bg-light">
+            <tr>
+                <th>Client Name</th>
+                <th>Appointment ID</th>
+                <th>Appintment Date</th>
+                <th>Appintment Time</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pastAppoint:${listPastAppoints}">
+                <td th:text="${pastAppoint.name}">
+                    <div class="d-flex align-items-center">
+                        <p class="fw-bold mb-1"> Client Name</p>
+                    </div>
+                </td>
+                <td th:text="${pastAppoint.id}">
+                    <p class="fw-normal mb-1">Appointment ID</p>
+                </td>
+                <td th:text="${pastAppoint.date_time}">
+                    <p class="fw-normal mb-1">Appointment Date</p>
+                </td>
+                <td th:text="${pastAppoint.app_time}">
+                    <p class="fw-normal mb-1">Appointment Time</p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script th:src="@{/js/calendar.js}"></script>
+</body>
+</html>
