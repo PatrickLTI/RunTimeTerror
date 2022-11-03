@@ -1,7 +1,7 @@
 package com.patrick.rs.BarberShop.controller;
 
-import com.patrick.rs.BarberShop.model.User;
-import com.patrick.rs.BarberShop.services.RegistrationServices;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -9,10 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.validation.Valid;
+import com.patrick.rs.BarberShop.model.User;
+import com.patrick.rs.BarberShop.services.RegistrationServices;
 
 @Controller
 public class AppController {
@@ -24,6 +26,14 @@ public class AppController {
     public String showIndex() {
         return "index";
     }
+    
+    @GetMapping("/login")
+    public String showLogin(Model model) {
+    	User user = new User();
+    	model.addAttribute("user", user);
+        return "login";
+    }
+    
 
     @RequestMapping("/registration")
     public String showRegistration(Model model) {
@@ -47,11 +57,11 @@ public class AppController {
             return "registration";
 
         } else {
+        	
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String encodedPassword = passwordEncoder.encode(user.getPassword());
-            user.setPassword(encodedPassword);
+            user.setEncryptedPassword(encodedPassword);
 
-            user.setSimplePassword(encodedPassword);
             registrationService.save(user);
             return "new_users";
 //			userdashboard

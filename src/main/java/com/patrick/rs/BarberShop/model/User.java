@@ -35,14 +35,18 @@ public class User {
 	@Column(name = "confirmPassword", nullable = false)
 	private String simplePassword;
 
+	@Transient
 	@NotBlank(message = "Password should not be blank")
 	@Size(min = 5, max = 20, message = "Password must be between 5 - 20 characters")
-	@Column(name = "password", nullable = false)
 	private String password;
+	
+	@Column(name = "password", nullable = false, length = 64)
+	private String encryptedPassword;
 
 	private boolean isAdmin;
 
-	@DateTimeFormat(pattern = "yyyy-mm-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "created_at", columnDefinition = "timestamp default current_timestamp")
 	private Date createdAt;
 
 	public Long getId() {
@@ -107,6 +111,21 @@ public class User {
 
 	public void setSimplePassword(String simplePassword) {
 		this.simplePassword = simplePassword;
+	}
+
+	public String getEncryptedPassword() {
+		return encryptedPassword;
+	}
+
+	public void setEncryptedPassword(String encryptedPassword) {
+		this.encryptedPassword = encryptedPassword;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", email=" + email + ", fullName=" + fullName + ", phoneNumber=" + phoneNumber
+				+ ", simplePassword=" + simplePassword + ", password=" + password + ", encryptedPassword="
+				+ encryptedPassword + ", isAdmin=" + isAdmin + ", createdAt=" + createdAt + "]";
 	}
 
 }
