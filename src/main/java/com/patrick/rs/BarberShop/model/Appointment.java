@@ -12,8 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -25,8 +27,11 @@ public class Appointment {
 		@GeneratedValue(strategy=GenerationType.AUTO)
 		private Long id;
 		
+	    @NotBlank
+		@Email(message = "Please enter a valid email address")
 		private String email;
 		
+		@Size(min = 5, max = 20)
 		private String fullName;
 		
 		@NotBlank
@@ -37,6 +42,7 @@ public class Appointment {
 	    @DateTimeFormat(pattern = "yyyy-MM-dd")
 		private Date appDate;
 		
+		@NotBlank
 		private String appTime;
 		
 		private AppointmentStatus status = AppointmentStatus.Booked;
