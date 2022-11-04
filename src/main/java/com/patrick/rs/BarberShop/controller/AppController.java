@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -18,6 +19,7 @@ import com.patrick.rs.BarberShop.model.Appointment;
 import com.patrick.rs.BarberShop.model.User;
 import com.patrick.rs.BarberShop.repositories.AppointmentRepo;
 import com.patrick.rs.BarberShop.services.RegistrationServices;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -90,11 +92,6 @@ public class AppController {
         return "userdashboard";
 
 	}
-	@GetMapping("/calendar")
-	public String calendar(){
-		return "calendar";
-	}
-
 	@GetMapping("/appointment")
 	public String bookAppointment(Appointment appointment)
 	{
