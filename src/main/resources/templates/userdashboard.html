@@ -25,61 +25,11 @@
         <div class="inner text-center mt-5 justify-content-center">
             <p class="text-white mt-5">Xpression Kutz BARBERSHOP</p>
             <h1 class="text-uppercase text-warning mt-5">book new appointment</h1>
-            <button type="button" class="w3-xxxlarge btn btn-outline-warning rounded-circle px-4 py-2 mt-5"
-                    data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <i class="fa-regular fa-calendar-days"></i>
-            </button>
+            <a class="w3-xxxlarge btn btn-outline-warning rounded-circle px-4 py-2 mt-5" th:href="@{/appointment}"><i class="fa-regular fa-calendar-days"></i></a>
         </div>
 
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Book Appointment</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="m-2 row">
-                                <label class="col-4 col-form-label" for="fullName">Full
-                                    Name: </label>
-                                <div class="col-12">
-                                    <input type="text" class="form-control"/>
-                                </div>
 
-                                <label class="col-4 col-form-label" for="email">Email: </label>
-                                <div class="col-12">
-                                    <input type="email" class="form-control"/>
-                                </div>
-
-                                <label class="col-4 col-form-label" for="phoneNumber">Phone
-                                    Number: </label>
-                                <div class="col-12">
-                                    <input type="number" class="form-control"/>
-                                </div>
-
-                                <label class="col-4 col-form-label" for="appDate">Appointment
-                                    Date: </label>
-                                <div class="col-12">
-                                    <input type="date" class="form-control"/>
-                                </div>
-
-                                <label class="col-4 col-form-label" for="appTime">Appointment
-                                    Time: </label>
-                                <div class="col-12">
-                                    <input type="time"  class="form-control"/>
-                                </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     <!--    upcoming appointment-->
     <div class="mt-5 rounded">
@@ -96,8 +46,8 @@
             <tr>
                 <th>Client Name</th>
                 <th>Appointment ID</th>
-                <th>Appintment Date</th>
-                <th>Appintment Time</th>
+                <th>Appointment Date</th>
+                <th>Appointment Time</th>
                 <th>Actions</th>
             </tr>
             </thead>
