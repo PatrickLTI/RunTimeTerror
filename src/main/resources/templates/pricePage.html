@@ -29,8 +29,68 @@ button {
 button:hover {
 	opacity: 1;
 }
+
+table {
+	border-collapse: separate;
+	background: #fff;
+	border-radius: 5px;
+	margin: 50px auto;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+thead {
+	border-radius: 5px;
+}
+
+thead th {
+	font-family: "Georgia", Times, serif;
+	font-size: 16px;
+	font-weight: 400;
+	color: #fff;
+	text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+	text-align: left;
+	padding: 20px;
+	background-image: linear-gradient(#bf9f87, #4a5564);
+	border-top: 1px solid #858d99;
+}
+
+tbody tr td {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400;
+	color: #5f6062;
+	font-size: 13px;
+	padding: 20px 20px 20px 20px;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+tbody tr:nth-child(2n) {
+	background: #f0f3f5;
+}
+
+tbody tr:last-child td {
+	border-bottom: none;
+}
+
+:last-child {
+	border-bottom-right-radius: 5px;
+}
+
+tbody:hover>tr td {
+	opacity: 0.5;
+	/* blur effect */
+	/* color:transparent;
+  	text-shadow: 0px 0px 2px rgba(0,0,0,0.8); */
+}
+
+tbody:hover>tr:hover td {
+	text-shadow: none;
+	color: #2d2d2d;
+	opacity: 1.0;
+}
+
+
 </style>
-<title>Registration Page</title>
+<title>Pricing Page</title>
 </head>
 
 
@@ -39,7 +99,63 @@ button:hover {
 	<div layout:fragment="content">
 
 		<section>
-			<div class="container"></div>
+			<div class="container">
+
+				<table>
+					<thead>
+						<tr>
+							<th>Services</th>
+							<th>Price</th>
+							<th>Note*</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Haircut (Adult)</td>
+							<td>$25</td>
+							<td>Basic haircut</td>
+						</tr>
+						<tr>
+							<td>Haircut (kids)</td>
+							<td>$15</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>Haircut with Beards</td>
+							<td>$35</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>Color and haircut</td>
+							<td>$25+</td>
+							<td>Please contact our specialists for exact pricing</td>
+						</tr>
+						<tr>
+							<td>Relaxer</td>
+							<td>$25+</td>
+							<td>Please contact our specialists for exact pricing</td>
+						</tr>
+						<tr>
+							<td>Perm</td>
+							<td>$65+</td>
+							<td>Please contact our specialists for exact pricing</td>
+						</tr>
+						<tr>
+							<td>Braids/Twists</td>
+							<td>$75+</td>
+							<td>Please contact our specialists for exact pricing</td>
+						</tr>
+						<tr>
+							<td>Special Styles</td>
+							<td>$75+</td>
+							<td>Please contact our specialists for exact pricing</td>
+						</tr>
+					</tbody>
+				</table>
+
+
+
+			</div>
 		</section>
 	</div>
 
