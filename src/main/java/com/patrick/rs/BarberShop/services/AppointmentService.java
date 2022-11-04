@@ -71,6 +71,7 @@ public class AppointmentService {
            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Appointment ID not found");
        }
        appointment.setId(id);
+       System.out.println(appointment);
        appointmentRepo.save(appointment);
        return appointment;
    }

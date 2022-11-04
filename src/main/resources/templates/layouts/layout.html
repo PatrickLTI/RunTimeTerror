@@ -1,120 +1,111 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head>
-<meta charset="ISO-8859-1">
-<title>Welcome to Exam One of Programming III</title>
-<link rel="stylesheet"
-	href="/webjars/bootstrap/5.2.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/styles.css">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head >
+    <meta charset="ISO-8859-1">
+    <title>Welcome to Exam One of Programming III</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.2.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
 
-<style>
-html {
-	position: relative;
-	min-height: 100%;
-	padding-bottom: 160px;
-}
+    <style>
+        html {
+            position: relative;
+            min-height: 100%;
+            padding-bottom:160px;
+        }
+        body {
+            margin-bottom: 160px;
+        }
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
 
-body {
-	margin-bottom: 160px;
-}
+        a.nav-link {
+            color: #edd881 !important;
+            border: 1px solid rgba(0, 0, 0, 0);
+            transition: all 250ms;
+            margin-right: 20px;
+            margin-left: 20px;
+        }
 
-::-webkit-scrollbar {
-	display: none;
-}
+        a.nav-link:hover {
+            color: white !important;
+            box-sizing: border-box;
+            border: 1px solid #edd881 !important;
+        }
 
-footer {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-}
+        a.border:hover {
+            transform: scale(1.07);
 
-a.nav-link {
-	color: #edd881 !important;
-	border: 1px solid rgba(0, 0, 0, 0);
-	transition: all 250ms;
-	margin-right: 20px;
-	margin-left: 20px;
-}
-
-a.nav-link:hover {
-	color: white !important;
-	box-sizing: border-box;
-	border: 1px solid #edd881 !important;
-}
-
-a.border:hover {
-	transform: scale(1.07);
-}
-
-.logoutBtn {
-	
-}
-</style>
+        }
+    </style>
 </head>
 <body>
-	<!-- Navbar -->
-	<header>
-		<nav
-			class="navbar navbar-expand-xl navbar-dark text-center bg-dark bg-opacity-50 pt-3">
-			<div
-				class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0 justify-content-end fs-4 text-uppercase">
-				<ul class="navbar-nav text-center">
-					<li class="nav-item active "><a class="nav-link"
-						th:href="@{/}">home</a></li>
-					<li class="nav-item active"><a class="nav-link"
-						th:href="@{/pricing}">pricing</a></li>
-				</ul>
-			</div>
-			<div class="my-2 mx-2 order-0 order-md-1 position-relative">
-				<a class="" th:href="@{/}"> <img th:src="@{/images/logoV1.png}"
-					src="/images/logoV1.png" width="150px" height="150px"
-					class="rounded-circle" alt="Logo">
-				</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse"
-					data-target=".dual-collapse2">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-			</div>
-			<div
-				class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2 fs-4 text-uppercase d-xl-flex">
-				<ul class="navbar-nav text-center">
-					<li class="nav-item active"
-						th:if="${#request.userPrincipal == null}"><a class="nav-link"
-						th:href="@{/registration}">sign-up</a></li>
-					<li class="nav-item active"
-						th:if="${#request.userPrincipal == null}"><a class="nav-link"
-						th:href="@{/login}">log in</a></li>
-					<li class="nav-item active" th:if="${#request.userPrincipal}">
-						<a class="nav-link" th:href="@{/userdashboard}">Dashboard</a>
-					</li>
-					<li class="nav-item active" th:if="${#request.userPrincipal}">
-						
-						<form th:action="@{/logout}" th:method="POST" class="nav-link">
-							<input type="submit" value="logout">
 
-						</form>
-					</li>
-				</ul>
-				<ul class="navbar-nav flex-grow-1 justify-content-end">
-					<li class="nav-item"><a class="nav-link border mx-4"
-						th:href="@{/appointment}">Book an appointment</a></li>
-				</ul>
-			</div>
-		</nav>
-	</header>
-	<!-- /Navbar -->
-	<section layout:fragment="content"></section>
->>>>>>> master
+<!-- Navbar -->
+<header>
+    <nav class="navbar navbar-expand-xl navbar-dark text-center bg-dark bg-opacity-50 pt-3">
+        <div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0 justify-content-end fs-4 text-uppercase">
+           
+            <ul class="navbar-nav text-center">
+                <li class="nav-item active ">
+                    <a class="nav-link" th:href="@{/}">home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/pricing}">pricing</a>
+                </li>
+            </ul>
+        </div>
+        <div class="my-2 mx-2 order-0 order-md-1 position-relative">
+            <a class="" th:href="@{/}">
+                <img th:src="@{/images/logoV1.png}" src="/images/logoV1.png" width="150px" height="150px"
+                     class="rounded-circle" alt="Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2 fs-4 text-uppercase d-xl-flex">
+            <ul class="navbar-nav text-center">
+                <li class="nav-item active" th:if="${#request.userPrincipal == null}">
+                    <a class="nav-link" th:href="@{/registration}">sign-up</a>
+                </li>
+                <li class="nav-item active" th:if="${#request.userPrincipal == null}">
+                    <a class="nav-link" th:href="@{/login}">log in</a>
+                </li>
+                <li class="nav-item active" th:if="${#request.userPrincipal}">
+                    <a class="nav-link" th:href="@{/userdashboard}">Dashboard</a>
+                </li>
+                <li class="nav-item active" th:if="${#request.userPrincipal}">
+                    
+                    <a class="nav-link" th:href="@{/logout}">log out</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav flex-grow-1 justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link border mx-4" th:href="@{/appointment}">Book an appointment</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<!-- /Navbar -->
+<section layout:fragment="content"></section>
 
-	<footer
-		class="py-3 text-white text-center bg-dark bg-opacity-50 border-top border-dark border-3">
-		Xpression Kutz<br> 947 Jerry Roads, South Pedro<br> WY 03455
-	</footer>
 
-	<!--boot strap javascript  -->
-	<script type="text/javascript"
-		src="/webjars/jquery/3.6.1/jquery.min.js"></script>
-	<script src="/webjars/bootstrap/5.2.2/js/bootstrap.bundle.js"></script>
+<footer class="py-3 text-white text-center bg-dark bg-opacity-50 border-top border-dark border-3">
+    Xpression Kutz<br>
+    947 Jerry Roads, South Pedro<br>
+    WY 03455
+</footer>
+
+<!--boot strap javascript  -->
+<script type="text/javascript" src="/webjars/jquery/3.6.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/5.2.2/js/bootstrap.bundle.js"></script>
 </body>
 </html>

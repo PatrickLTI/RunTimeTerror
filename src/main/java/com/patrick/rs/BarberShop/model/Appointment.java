@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,8 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -25,18 +29,24 @@ public class Appointment {
 		@GeneratedValue(strategy=GenerationType.AUTO)
 		private Long id;
 		
+	    @NotBlank
+		@Email(message = "Please enter a valid email address")
 		private String email;
 		
+		@Size(min = 2, max = 20)
 		private String fullName;
 		
 		@NotBlank
 		@Digits(message="Cellphone must be exactly 10 charcaters", fraction = 0, integer = 10)
 		private String phoneNumber;
 		
+		
+		@NotNull
 		@FutureOrPresent
 	    @DateTimeFormat(pattern = "yyyy-MM-dd")
 		private Date appDate;
 		
+		@NotBlank
 		private String appTime;
 		
 		private AppointmentStatus status = AppointmentStatus.Booked;
@@ -110,6 +120,13 @@ public class Appointment {
 
 		public void setPhoneNumber(String phoneNumber) {
 			this.phoneNumber = phoneNumber;
+		}
+
+		@Override
+		public String toString() {
+			return "Appointment [id=" + id + ", email=" + email + ", fullName=" + fullName + ", phoneNumber="
+					+ phoneNumber + ", appDate=" + appDate + ", appTime=" + appTime + ", status=" + status
+					+ ", createdAt=" + createdAt + "]";
 		}		
 
 }
