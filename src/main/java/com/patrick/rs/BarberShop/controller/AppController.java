@@ -1,25 +1,31 @@
 package com.patrick.rs.BarberShop.controller;
 
-import com.patrick.rs.BarberShop.model.Appointment;
-import com.patrick.rs.BarberShop.model.User;
-import com.patrick.rs.BarberShop.services.AppointmentService;
-import com.patrick.rs.BarberShop.services.UserService;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.Valid;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import com.patrick.rs.BarberShop.model.Appointment;
+import com.patrick.rs.BarberShop.model.User;
+import com.patrick.rs.BarberShop.services.AppointmentService;
+import com.patrick.rs.BarberShop.services.UserService;
 
 @Controller
 public class AppController {
@@ -112,6 +118,9 @@ public class AppController {
 
     @GetMapping("/userdashboard")
     public String showDashboard(Model model) {
+    	if (SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(new SimpleGrantedAuthority("admin"))) {
+    		return "redirect:/admindashboard";
+    	}
         List<Appointment> listAppoints = appointmentService.getAll();
         model.addAttribute("listAppoints", listAppoints);
 
@@ -128,10 +137,14 @@ public class AppController {
         return "edit_appoint";
     }
 
-    @PostMapping("/edit_appoint/save")
-    public String updateAppointment(@ModelAttribute("appointment") Appointment appointment) {
-        appointmentService.save(appointment);
-        return "userdashboard";
+    @PostMapping("/edit_appoint")
+    public String updateAppointment(@Valid Appointment appointment, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()){
+        	return "edit_appoint";
+        }
+    	
+    	appointmentService.update(appointment.getId(), appointment);
+        return "redirect:/userdashboard";
     }
 
     @GetMapping("/delete_appoint/{id}")
@@ -141,7 +154,8 @@ public class AppController {
     }
 
     @GetMapping("/appointment")
-    public String bookAppointment(Appointment appointment) {
+    public String bookAppointment(Model model) {
+    	model.addAttribute("appointment", new Appointment());
         return "appointment";
     }
 

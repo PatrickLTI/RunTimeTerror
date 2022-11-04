@@ -33,7 +33,7 @@ public class Appointment {
 		@Email(message = "Please enter a valid email address")
 		private String email;
 		
-		@Size(min = 5, max = 20)
+		@Size(min = 2, max = 20)
 		private String fullName;
 		
 		@NotBlank
@@ -120,6 +120,13 @@ public class Appointment {
 
 		public void setPhoneNumber(String phoneNumber) {
 			this.phoneNumber = phoneNumber;
+		}
+
+		@Override
+		public String toString() {
+			return "Appointment [id=" + id + ", email=" + email + ", fullName=" + fullName + ", phoneNumber="
+					+ phoneNumber + ", appDate=" + appDate + ", appTime=" + appTime + ", status=" + status
+					+ ", createdAt=" + createdAt + "]";
 		}		
 
 }
