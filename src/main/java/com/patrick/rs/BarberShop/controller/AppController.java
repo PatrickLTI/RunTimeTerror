@@ -10,10 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.patrick.rs.BarberShop.model.Appointment;
 import com.patrick.rs.BarberShop.model.User;
@@ -92,6 +89,22 @@ public class AppController {
         return "userdashboard";
 
 	}
+
+    @GetMapping("/dashboard/edit_appoint/{id}")
+    public String showEditAppointmentPage(@PathVariable(name = "id") long id, Model model) {
+        model.addAttribute("appointment",appointmentService.findById(id));
+        return "edit_appoint";
+    }
+
+    @PostMapping("/dashboard/edit_appoint/save")
+    public String updateAppointment(@PathVariable(name = "id") long id, @ModelAttribute("appointment") Appointment appointment){
+        appointmentService.update(id, appointment);
+        return "userdashboard";
+    }
+//    @RequestMapping("/save_appoint" ,method= RequestMethod.POST)
+//    public String saveAppointment()
+
+
 	@GetMapping("/appointment")
 	public String bookAppointment(Appointment appointment)
 	{
