@@ -64,7 +64,8 @@ public class AppController {
 	}
 
 	@PostMapping(value = "/registerUser")
-	public String registerUsers(@Valid User user, Errors errors, Model model, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+	public String registerUsers(@Valid User user, Errors errors, Model model, BindingResult bindingResult, 
+			RedirectAttributes redirectAttributes) {
 
 		if (user.getPassword() != null && user.getSimplePassword() != null) {
 			if (!user.getPassword().equals(user.getSimplePassword())) {
