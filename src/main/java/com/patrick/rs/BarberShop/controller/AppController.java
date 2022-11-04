@@ -90,19 +90,23 @@ public class AppController {
 
 	}
 
-    @GetMapping("/dashboard/edit_appoint/{id}")
+    @GetMapping("/edit_appoint/{id}")
     public String showEditAppointmentPage(@PathVariable(name = "id") long id, Model model) {
         model.addAttribute("appointment",appointmentService.findById(id));
         return "edit_appoint";
     }
 
-    @PostMapping("/dashboard/edit_appoint/save")
+    @PostMapping("/edit_appoint/save/{id}")
     public String updateAppointment(@PathVariable(name = "id") long id, @ModelAttribute("appointment") Appointment appointment){
-        appointmentService.update(id, appointment);
+        appointmentService.update(id,appointment);
         return "userdashboard";
     }
-//    @RequestMapping("/save_appoint" ,method= RequestMethod.POST)
-//    public String saveAppointment()
+
+    @GetMapping("/delete_appoint/{id}")
+    public String deleteAppointment(@PathVariable(name = "id") long id) {
+        appointmentService.delete(id);
+        return "redirect:/userdashboard";
+    }
 
 
 	@GetMapping("/appointment")

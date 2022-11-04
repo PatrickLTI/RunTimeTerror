@@ -6,7 +6,7 @@
 
     <style>
         body {
-            background-image: url("/images/haircut.jpg");
+            background-image: url("/images/dashboardBg.jpeg");
             background-repeat: no-repeat;
             background-position: 0% 0%;
             background-size: cover;
@@ -41,14 +41,12 @@
     <section>
         <div class="container">
 
-            <form  th:action="@{/dashboard/edit_appoint/{*{id}}" th:object="${appointment}"
+            <form  th:action="@{'/edit_appoint/save/' + ${appointment.id}}" th:object="${appointment}"
                   method="post" style="max-width: 600px; margin: 10em auto;">
-
                 <div class="m-2 row">
                     <label class="col-4 col-form-label" for="fullName">Appointment ID: </label>
                     <div class="col-12">
                         <input type="text" th:field="*{id}" class="form-control" readonly="readonly" disabled/>
-
                     </div>
                     <label class="col-4 col-form-label" for="fullName">Client
                         Name: </label>
@@ -70,21 +68,12 @@
                     <div class="col-12">
                         <input type="date" th:field="*{appDate}" class="form-control" />
                     </div>
-                    <div>
-                        <p class="alert alert-danger"
-                           th:if="${#fields.hasErrors('appDate')}" th:errors="*{appDate}">
-                    </div>
 
                     <label class="col-4 col-form-label" for="appTime">Appointment
                         Time: </label>
                     <div class="col-12">
                         <input type="time" th:field="*{appTime}" class="form-control" />
                     </div>
-                    <div>
-                        <p class="alert alert-danger"
-                           th:if="${#fields.hasErrors('appTime')}" th:errors="*{appTime}">
-                    </div>
-
 
                     <div class="m-3 text-center">
                         <button type="submit" class="btn btn-primary">Save</button>
