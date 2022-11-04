@@ -62,7 +62,7 @@ public class AppController {
             return "registration";
 
         } else {
-        	
+
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String encodedPassword = passwordEncoder.encode(user.getPassword());
             user.setEncryptedPassword(encodedPassword);
@@ -72,6 +72,16 @@ public class AppController {
 //			userdashboard
         }
     }
+
+	@GetMapping("/dashboard")
+	public String showDashboard(){
+		return "userdashboard";
+
+	}
+	@GetMapping("/calendar")
+	public String calendar(){
+		return "calendar";
+	}
 
 	@GetMapping("/appointment")
 	public String bookAppointment(Appointment appointment)
@@ -89,5 +99,4 @@ public class AppController {
 		 repo.save(appointment);
 		return "appointmentbooked";
 	}
-
 }
