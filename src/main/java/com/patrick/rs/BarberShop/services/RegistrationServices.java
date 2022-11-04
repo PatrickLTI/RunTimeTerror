@@ -9,20 +9,19 @@ import com.patrick.rs.BarberShop.repositories.UserRepo;
 
 
 
-@Service
+/*@Service
 @Transactional
 public class RegistrationServices {
 
 	@Autowired
 	private UserRepo repo;
-
+*/
 	/*
 	 * public List<Product> listAll() { return repo.findAll(); }
 	 */
-
-	public void save(User user) {
-		repo.save(user);
-	}
+	/*
+	 * public void save(User user) { repo.save(user); }
+	 */
 
 	/*
 	 * public Product get(long id) { return repo.findById(id).get(); }
@@ -31,5 +30,6 @@ public class RegistrationServices {
 	/*
 	 * public void delete(long id) { repo.deleteById(id); }
 	 */
-
-}
+	/*
+	 * }
+	 */

@@ -53,7 +53,7 @@ public class UserService {
     * Attempts to save a user to the DB. Throws an exception if the email or phone number are already registered.
     * @param user The user object to be registered
     */
-   public void create(User user) {
+   public void save(User user) {
        Optional<User> emailEntry = userRepo.findByEmail(user.getEmail());
        Optional<User> phoneEntry = userRepo.findByPhoneNumber(user.getPhoneNumber());
        if (emailEntry.isPresent()) {
