@@ -50,6 +50,11 @@
 <header>
     <nav class="navbar navbar-expand-xl navbar-dark text-center bg-dark bg-opacity-50 pt-3">
         <div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0 justify-content-end fs-4 text-uppercase">
+            <ul th:if="${#request.userPrincipal} and ${#request.userPrincipal.principal.isAdmin()}" class="navbar-nav flex-grow-1">
+                <li class="nav-item">
+                    <a class="nav-link mx-4" th:href="@{/admindashboard}">Admin</a>
+                </li>
+            </ul>
             <ul class="navbar-nav text-center">
                 <li class="nav-item active ">
                     <a class="nav-link" th:href="@{/}">home</a>
