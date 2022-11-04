@@ -52,6 +52,12 @@ public class AppController {
         model.addAttribute("user", user);
         return "registration";
     }
+    
+    
+    @GetMapping("/pricing")
+    public String showPricePage() {
+    	return "pricePage";
+    }
 
     @PostMapping(value = "/registerUser")
     public String registerUsers(@Valid User user, Errors errors, Model model, BindingResult bindingResult) {

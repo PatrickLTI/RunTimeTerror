@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<head>
+
+<style>
+body {
+	background-image: url("/images/shave.jpg");
+	background-repeat: no-repeat;
+	background-position: 0% 0%;
+	background-size: cover;
+	font-family: "Georgia", Times, serif;
+}
+
+form {
+	background-color: #bf9f87;
+	border-radius: 15px;
+	opacity: .9;
+}
+
+button {
+	background-color: #d3b558 !important;
+	border: none !important;
+	opacity: 0.8;
+	color: white !important;
+}
+
+button:hover {
+	opacity: 1;
+}
+</style>
+<title>Registration Page</title>
+</head>
+
+
+<body>
+
+	<div layout:fragment="content">
+
+		<section>
+			<div class="container"></div>
+		</section>
+	</div>
+
+
+	<!--boot strap javascript  -->
+	<script src="/webjars/bootstrap/5.2.2/js/bootstrap.bundle.js"></script>
+</body>
+</html>
