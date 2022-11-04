@@ -2,16 +2,10 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/header}" xmlns="http://www.w3.org/1999/html">
+      layout:decorate="~{layouts/layout}" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>User Dashboard</title>
-    <link rel="stylesheet"
-          href="/webjars/bootstrap/5.2.2/css/bootstrap.min.css">
-    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
-    <script type="text/javascript"
-            src="/webjars/bootstrap/js/bootstrap.min.js">
-    </script>
     <link rel="stylesheet" th:href="@{/css/calendar.css}">
 </head>
 <!--<div th:replace="calendar::calendar">Calendar</div>-->
