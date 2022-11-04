@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/header}" xmlns="http://www.w3.org/1999/html">
+      layout:decorate="~{layouts/layout}">
 <head>
     <meta charset="UTF-8">
     <title>User Dashboard</title>
@@ -81,7 +80,7 @@
             </thead>
             <tbody>
             <tr th:each="appoint:${listAppoints}">
-                <td th:text="${appoint.name}">
+                <td th:text="${appoint.fullName}">
                     <div class="d-flex align-items-center">
                         <p class="fw-bold mb-1"> Client Name</p>
                     </div>
@@ -89,10 +88,10 @@
                 <td th:text="${appoint.id}">
                     <p class="fw-normal mb-1">Appointment ID</p>
                 </td>
-                <td th:text="${appoint.date_time}">
+                <td th:text="${appoint.appDate}">
                     <p class="fw-normal mb-1">Appointment Date</p>
                 </td>
-                <td th:text="${appoint.app_time}">
+                <td th:text="${appoint.appTime}">
                     <p class="fw-normal mb-1">Appointment Time</p>
                 </td>
                 <td>
@@ -127,7 +126,7 @@
             </thead>
             <tbody>
             <tr th:each="pastAppoint:${listPastAppoints}">
-                <td th:text="${pastAppoint.name}">
+                <td th:text="${pastAppoint.fullName}">
                     <div class="d-flex align-items-center">
                         <p class="fw-bold mb-1"> Client Name</p>
                     </div>
@@ -135,10 +134,10 @@
                 <td th:text="${pastAppoint.id}">
                     <p class="fw-normal mb-1">Appointment ID</p>
                 </td>
-                <td th:text="${pastAppoint.date_time}">
+                <td th:text="${pastAppoint.appDate}">
                     <p class="fw-normal mb-1">Appointment Date</p>
                 </td>
-                <td th:text="${pastAppoint.app_time}">
+                <td th:text="${pastAppoint.appTime}">
                     <p class="fw-normal mb-1">Appointment Time</p>
                 </td>
             </tr>
