@@ -13,16 +13,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.patrick.rs.BarberShop.model.Appointment;
 import com.patrick.rs.BarberShop.model.User;
+import com.patrick.rs.BarberShop.repositories.AppointmentRepo;
 import com.patrick.rs.BarberShop.services.RegistrationServices;
 
 @Controller
 public class AppController {
+	
+	@Autowired
+	AppointmentRepo repo;
 
     @Autowired
     private RegistrationServices registrationService;
 
-    @RequestMapping()
+    @RequestMapping("/")
     public String showIndex() {
         return "index";
     }
@@ -76,5 +81,22 @@ public class AppController {
 	@GetMapping("/calendar")
 	public String calendar(){
 		return "calendar";
+	}
+
+	@GetMapping("/appointment")
+	public String bookAppointment(Appointment appointment)
+	{
+		return "appointment";	
+	}
+	
+	@PostMapping("/appointment")
+	public String submitForm(@Valid Appointment appointment, BindingResult bindingResult, Model model) {
+		if(bindingResult.hasErrors()) 
+		{
+			 return "appointment";
+		}
+		
+		 repo.save(appointment);
+		return "appointmentbooked";
 	}
 }

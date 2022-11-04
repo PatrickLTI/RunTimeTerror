@@ -2,11 +2,17 @@ package com.patrick.rs.BarberShop.model;
 
 import java.util.Date;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -46,7 +52,8 @@ public class User {
 	private boolean isAdmin;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Column(name = "created_at", columnDefinition = "timestamp default current_timestamp")
+	@Column(nullable = false, updatable = false)
+	@CreationTimestamp
 	private Date createdAt;
 
 	public Long getId() {

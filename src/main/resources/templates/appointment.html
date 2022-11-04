@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="ISO-8859-1">
+<title>Book Appointment</title>
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/5.2.2/css/bootstrap.min.css" />
+<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+<script type="text/javascript"
+	src="/webjars/bootstrap/5.2.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container text-center">
+		<div>
+			<h1>Book Appointment</h1><br>
+		</div>
+		<form th:action="@{/appointment}" th:object="${appointment}"
+			method="post" style="max-width: 600px; margin: 0 auto;">
+			
+			<div class="form-group row">
+					<label class="col-4 col-form-label">E-mail: </label>
+					<div class="col-8">
+						<input type="email" th:field="*{email}" class="form-control" />
+						<span style="color: red" th:if="${#fields.hasErrors('email')}"
+							th:errors="*{email}"></span><br>
+					</div>
+				</div>
+				
+			<div class="form-group row">
+					<label class="col-4 col-form-label">Name: </label>
+					<div class="col-8">
+						<input type="text" th:field="*{fullName}" class="form-control" />
+						<span style="color: red" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></span><br>
+					</div>
+				</div>
+				
+				
+				<div class="form-group row">
+					<label class="col-4 col-form-label">Phone Number: </label>
+					<div class="col-8">
+						<input type="text" th:field="*{phoneNumber}" class="form-control" />
+						<span style="color: red" th:if="${#fields.hasErrors('phoneNumber')}"
+							th:errors="*{phoneNumber}"></span><br>
+					</div>
+				</div>
+				
+				
+				
+				<div class="form-group row">
+					<label class="col-4 col-form-label">Appointment Date: </label>
+					<div class="col-8">
+						<input type="date" th:field="*{appDate}" class="form-control" />
+						<span style="color: red" th:if="${#fields.hasErrors('appDate')}"
+							th:errors="*{appDate}"></span><br>
+					</div>
+				</div>
+				
+				<div class="form-group row">
+					<label class="col-4 col-form-label">Appointment Time: </label>
+					<div class="col-8">
+						<input type="time" th:field="*{appTime}" class="form-control" />
+						<span style="color: red" th:if="${#fields.hasErrors('appTime')}"
+							th:errors="*{appTime}"></span><br>
+					</div>
+				</div>
+				
+				<div>
+					<button type="submit" class="btn btn-primary">Submit</button>
+			    </div>
+			</form>
+</div>
+</body>
+</html>

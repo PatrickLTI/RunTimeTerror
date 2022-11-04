@@ -35,9 +35,7 @@ button:hover {
 <title>Registration Page</title>
 </head>
 
-
 <body>
-
 	<div layout:fragment="content">
 
 		<section>
@@ -45,6 +43,15 @@ button:hover {
 				<form th:action="@{/login}" th:object="${user}" method="post"
 					style="max-width: 600px; margin: 10em auto;">
 					<div class="m-2 row">
+
+						<label class="col-4 col-form-label" for="email">Email: </label>
+						<div class="col-12">
+							<input type="email" th:field="*{email}" class="form-control" />
+						</div>
+						<div>
+							<p class="alert alert-danger"
+								th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+						</div>
 
 						<label class="col-4 col-form-label" for="password">Password:
 						</label>
@@ -55,15 +62,6 @@ button:hover {
 						<div>
 							<p class="alert alert-danger"
 								th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
-						</div>
-
-						<label class="col-4 col-form-label" for="email">Email: </label>
-						<div class="col-12">
-							<input type="email" th:field="*{email}" class="form-control" />
-						</div>
-						<div>
-							<p class="alert alert-danger"
-								th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
 						</div>
 
 						<div class="m-3 text-center">

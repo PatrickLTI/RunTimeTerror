@@ -53,7 +53,7 @@ public class SecurityConfig {
                 .formLogin()
                 .loginPage("/login")
                 .usernameParameter("email")
-                .passwordParameter("passwordRaw")
+                .passwordParameter("password")
                 .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/")
                 .permitAll()
