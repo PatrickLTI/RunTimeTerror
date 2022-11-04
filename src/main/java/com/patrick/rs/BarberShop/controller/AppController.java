@@ -2,6 +2,7 @@ package com.patrick.rs.BarberShop.controller;
 
 import javax.validation.Valid;
 
+import com.patrick.rs.BarberShop.services.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,8 @@ import com.patrick.rs.BarberShop.model.User;
 import com.patrick.rs.BarberShop.repositories.AppointmentRepo;
 import com.patrick.rs.BarberShop.services.RegistrationServices;
 
+import java.util.List;
+
 @Controller
 public class AppController {
 	
@@ -26,6 +29,9 @@ public class AppController {
 
     @Autowired
     private RegistrationServices registrationService;
+
+    @Autowired
+    private AppointmentService appointmentService;
 
     @RequestMapping("/")
     public String showIndex() {
@@ -62,7 +68,7 @@ public class AppController {
             return "registration";
 
         } else {
-        	
+
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String encodedPassword = passwordEncoder.encode(user.getPassword());
             user.setEncryptedPassword(encodedPassword);
@@ -72,6 +78,22 @@ public class AppController {
 //			userdashboard
         }
     }
+
+	@GetMapping("/dashboard")
+	public String showDashboard(Model model){
+        List<Appointment> listAppoints= appointmentService.getAll();
+        model.addAttribute("listAppoints", listAppoints);
+
+        List<Appointment> listPastAppoints= appointmentService.getAll();
+        model.addAttribute("listPastAppoints", listPastAppoints);
+
+        return "userdashboard";
+
+	}
+	@GetMapping("/calendar")
+	public String calendar(){
+		return "calendar";
+	}
 
 	@GetMapping("/appointment")
 	public String bookAppointment(Appointment appointment)
@@ -89,5 +111,4 @@ public class AppController {
 		 repo.save(appointment);
 		return "appointmentbooked";
 	}
-
 }

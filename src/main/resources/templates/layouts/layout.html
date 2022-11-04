@@ -16,6 +16,9 @@
         body {
             margin-bottom: 160px;
         }
+        ::-webkit-scrollbar {
+            display: none;
+        }
         footer {
             position: absolute;
             bottom: 0;
@@ -72,6 +75,9 @@
                 </li>
                 <li class="nav-item active" th:if="${#request.userPrincipal == null}">
                     <a class="nav-link" th:href="@{/login}">log in</a>
+                </li>
+                <li class="nav-item active" th:if="${#request.userPrincipal}">
+                    <a class="nav-link" th:href="@{/dashboard}">Dashboard</a>
                 </li>
                 <li class="nav-item active" th:if="${#request.userPrincipal}">
                     <a class="nav-link" th:href="@{/logout}">log out</a>
