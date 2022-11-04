@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <style>
+        body {
+            background-image: url("/images/dashboardBg.jpeg");
+            background-repeat: no-repeat;
+            background-position: 70% 70%;
+            background-size: cover;
+            font-family: "Georgia", Times, serif;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/calendar.css}">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <!-- Button trigger modal -->
+    <div class="book-wrapper mb-5">
+
+        <!--    upcoming appointment-->
+        <div class="mt-5 rounded">
+            <nav class="navbar bg-light rounded-top">
+                <div class="container-fluid justify-content-center">
+                    <a class="navbar-brand fw-bold mb-1" href="#"> <img
+                            src="images/logoV1.png" alt="Logo" width="30" height="30"
+                            class="d-inline-block align-text-"> Upcoming Appointment
+                    </a>
+                </div>
+            </nav>
+            <table class="table align-middle text-center mb-0 bg-white rounded-top">
+                <thead class="bg-light">
+                <tr>
+                    <th>Client Name</th>
+                    <th>Appointment ID</th>
+                    <th>Appointment Date</th>
+                    <th>Appointment Time</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="appointment:${futureAppointments}">
+                    <td th:text="${appointment.fullName}">
+                        <div class="d-flex align-items-center">
+                            <p class="fw-bold mb-1">Client Name</p>
+                        </div>
+                    </td>
+                    <td th:text="${appointment.id}">
+                        <p class="fw-normal mb-1">Appointment ID</p>
+                    </td>
+                    <td th:text="${appointment.appDate.toString().substring(0, 10)}">
+                        <p class="fw-normal mb-1">Appointment Date</p>
+                    </td>
+                    <td th:text="${appointment.appTime}">
+                        <p class="fw-normal mb-1">Appointment Time</p>
+                    </td>
+                    <td>
+                        <a class="text-white btn btn-primary" th:href="@{'/edit_appoint/' + ${appointment.id}}">Edit</a>
+                        &nbsp;
+                        <a class="text-white btn btn-primary" th:href="@{'/delete_appoint/' + ${appointment.id}}">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!--    past appointment-->
+        <div class="mt-5 rounded">
+            <nav class="navbar bg-light rounded-top">
+                <div class="container-fluid justify-content-center">
+                    <a class="navbar-brand fw-bold mb-1" href="#"> <img
+                            src="images/logoV1.png" alt="Logo" width="30" height="30"
+                            class="d-inline-block align-text-"> Past Appointment
+                    </a>
+                </div>
+            </nav>
+            <table
+                    class="table align-middle text-center mb-0 bg-white rounded-top">
+                <thead class="bg-light">
+                <tr>
+                    <th>Client Name</th>
+                    <th>Appointment ID</th>
+                    <th>Appointment Date</th>
+                    <th>Appointment Time</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="appointment:${pastAppointments}">
+                    <td th:text="${appointment.fullName}">
+                        <div class="d-flex align-items-center">
+                            <p class="fw-bold mb-1">Client Name</p>
+                        </div>
+                    </td>
+                    <td th:text="${appointment.id}">
+                        <p class="fw-normal mb-1">Appointment ID</p>
+                    </td>
+                    <td th:text="${appointment.appDate.toString().substring(0, 10)}">
+                        <p class="fw-normal mb-1">Appointment Date</p>
+                    </td>
+                    <td th:text="${appointment.appTime}">
+                        <p class="fw-normal mb-1">Appointment Time</p>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
