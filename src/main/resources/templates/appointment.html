@@ -1,72 +1,128 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<meta charset="ISO-8859-1">
-<title>Book Appointment</title>
-<link rel="stylesheet" type="text/css"
-	href="/webjars/bootstrap/5.2.2/css/bootstrap.min.css" />
-<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
-<script type="text/javascript"
-	src="/webjars/bootstrap/5.2.2/js/bootstrap.min.js"></script>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<head>
+
+<style>
+body {
+	background-image: url("/images/registerBackground.jpg");
+	background-repeat: no-repeat;
+	background-position: 0% 0%;
+	background-size: cover;
+	font-family: "Georgia", Times, serif;
+}
+
+form {
+	background-color: #bf9f87;
+	border-radius: 15px;
+	opacity: .9;
+}
+
+button {
+	background-color: #d3b558 !important;
+	border: none !important;
+	opacity: 0.8;
+	color: white !important;
+}
+
+button:hover {
+	opacity: 1;
+	/* 	height: 125% !important;
+	width: 25% !important; */
+}
+</style>
+<title>Registration Page</title>
 </head>
+
 <body>
-<div class="container text-center">
-		<div>
-			<h1>Book Appointment</h1><br>
-		</div>
-		<form th:action="@{/appointment}" th:object="${appointment}"
-			method="post" style="max-width: 600px; margin: 0 auto;">
-			
-			<div class="form-group row">
-					<label class="col-4 col-form-label">E-mail: </label>
-					<div class="col-8">
-						<input type="email" th:field="*{email}" class="form-control" />
-						<span style="color: red" th:if="${#fields.hasErrors('email')}"
-							th:errors="*{email}"></span><br>
+	<div layout:fragment="content">
+
+		<section>
+			<div class="container">
+
+				<form th:action="@{/appointment}" th:object="${appointment}"
+					method="post" style="max-width: 600px; margin: 10em auto;">
+
+					<div class="m-2 row">
+
+						<label class="col-4 col-form-label" for="fullName">Full
+							Name: </label>
+						<div class="col-12">
+							<input type="text" th:field="*{fullName}" class="form-control" />
+
+						</div>
+
+						<div>
+							<p class="alert alert-danger"
+								th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}">
+						</div>
+
+						<label class="col-4 col-form-label" for="email">Email: </label>
+						<div class="col-12">
+							<input type="email" th:field="*{email}" class="form-control" />
+						</div>
+						<div>
+							<p class="alert alert-danger"
+								th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+						</div>
+
+						<label class="col-4 col-form-label" for="phoneNumber">Phone
+							Number: </label>
+						<div class="col-12">
+							<input type="number" th:field="*{phoneNumber}"
+								class="form-control" />
+						</div>
+						<div>
+							<p class="alert alert-danger"
+								th:if="${#fields.hasErrors('phoneNumber')}"
+								th:errors="*{phoneNumber}">
+						</div>
+
+
+
+						<label class="col-4 col-form-label" for="appDate">Appointment
+							Date: </label>
+						<div class="col-12">
+							<input type="date" th:field="*{appDate}" class="form-control" />
+						</div>
+						<div>
+							<p class="alert alert-danger"
+								th:if="${#fields.hasErrors('appDate')}" th:errors="*{appDate}">
+						</div>
+
+
+
+						<label class="col-4 col-form-label" for="appTime">Appointment
+							Time: </label>
+						<div class="col-12">
+							<input type="time" th:field="*{appTime}" class="form-control" />
+						</div>
+						<div>
+							<p class="alert alert-danger"
+								th:if="${#fields.hasErrors('appTime')}" th:errors="*{appTime}">
+						</div>
+
+
+					<div class="m-3 text-center">
+							<button type="submit" class="btn btn-primary">Book</button>
+						</div>
 					</div>
-				</div>
-				
-			<div class="form-group row">
-					<label class="col-4 col-form-label">Name: </label>
-					<div class="col-8">
-						<input type="text" th:field="*{fullName}" class="form-control" />
-						<span style="color: red" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></span><br>
-					</div>
-				</div>
-				
-				
-				<div class="form-group row">
-					<label class="col-4 col-form-label">Phone Number: </label>
-					<div class="col-8">
-						<input type="text" th:field="*{phoneNumber}" class="form-control" />
-						<span style="color: red" th:if="${#fields.hasErrors('phoneNumber')}"
-							th:errors="*{phoneNumber}"></span><br>
-					</div>
-				</div>
-				
-				
-				
-				<div class="form-group row">
-					<label class="col-4 col-form-label">Appointment Date: </label>
-					<div class="col-8">
-						<input type="date" th:field="*{appDate}" class="form-control" />
-						<span style="color: red" th:if="${#fields.hasErrors('appDate')}"
-							th:errors="*{appDate}"></span><br>
-					</div>
-				</div>
-				
-				<div class="form-group row">
-					<label class="col-4 col-form-label">Appointment Time: </label>
-					<div class="col-8">
-						<input type="time" th:field="*{appTime}" class="form-control" />
-						<span style="color: red" th:if="${#fields.hasErrors('appTime')}"
-							th:errors="*{appTime}"></span><br>
-					</div>
-				</div>
-				
-				<div>
-					<button type="submit" class="btn btn-primary">Submit</button>
-			    </div>
-			</form>
-</div>
+				</form>
+			</div>
+		</section>
+	</div>
+
+
+	<!--boot strap javascript  -->
+	<script src="/webjars/bootstrap/5.2.2/js/bootstrap.bundle.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
