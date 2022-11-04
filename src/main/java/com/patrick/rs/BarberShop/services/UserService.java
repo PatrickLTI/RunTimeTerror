@@ -15,8 +15,10 @@ import java.util.Optional;
 @Service
 @Transactional
 public class UserService {
-
-   @Autowired
+	
+	public final static String EMAIL_TAKEN="email_taken";
+	public final static String PHONENUMBER_TAKEN="PHONENUMBER_TAKEN";
+	@Autowired
    private UserRepo userRepo;
 
    /**
@@ -48,21 +50,26 @@ public class UserService {
        return userRepo.findByEmail(email).orElse(null);
    }
 
+//   testing save method, taken from registration services
+	public void save(User user) {
+		userRepo.save(user);
+	}
 
    /**
     * Attempts to save a user to the DB. Throws an exception if the email or phone number are already registered.
     * @param user The user object to be registered
+ * @throws Exception if email or phone number is taken
     */
-   public void create(User user) {
+   public void create(User user) throws Exception {
        Optional<User> emailEntry = userRepo.findByEmail(user.getEmail());
        Optional<User> phoneEntry = userRepo.findByPhoneNumber(user.getPhoneNumber());
        if (emailEntry.isPresent()) {
-           throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The email is already registered");
+           throw new Exception(EMAIL_TAKEN);
        } else if (phoneEntry.isPresent()) {
-           throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The phone number is already registered");
+           throw new Exception(PHONENUMBER_TAKEN);
        } else {
            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-           user.setPassword(passwordEncoder.encode(user.getPassword()));
+           user.setEncryptedPassword(passwordEncoder.encode(user.getPassword()));
            user.setPhoneNumber(user.getPhoneNumber().replace("-", "").replace(" ", ""));
            userRepo.save(user);
        }

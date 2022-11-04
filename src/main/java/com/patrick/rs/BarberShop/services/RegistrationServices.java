@@ -7,8 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.patrick.rs.BarberShop.model.User;
 import com.patrick.rs.BarberShop.repositories.UserRepo;
 
-
-
 @Service
 @Transactional
 public class RegistrationServices {
@@ -26,9 +24,7 @@ public class RegistrationServices {
 
 	/*
 	 * public Product get(long id) { return repo.findById(id).get(); }
-	 */
-
-	/*
+	 * 
 	 * public void delete(long id) { repo.deleteById(id); }
 	 */
 
