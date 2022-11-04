@@ -1,90 +1,86 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layouts/layout}">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
 
 <head>
-<link rel="stylesheet" th:href="@{/css/styles.css}">
-<style>
-body {
-	background-image: url("/images/indexImage.jpg");
-	background-repeat: no-repeat;
-	background-position: 0 0;
-	background-size: cover;
-}
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        body {
+            background-image: url("/images/indexImage.jpg");
+            background-repeat: no-repeat;
+            background-position: 0 0;
+            background-size: cover;
+        }
 
-.container img {
-	width: 100%;
-	height: auto;
-}
-</style>
-<title>Home</title>
+
+        .container img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+    <title>Home</title>
 </head>
 <body>
-	<div layout:fragment="content">
+<div layout:fragment="content">
+    <section class="container mt-5 text-white">
 
-		<section class="my-5">
-			<div class="container">
+        <div class="row my-5 bg-dark bg-opacity-75">
+            <div class="col-5 p-3 my-auto">
+                <img src="/images/index/team.png" alt="Image of the team">
+            </div>
+            <div class="col-7 p-3">
+                <p>Why is it that when one man builds a wall, the next man
+                    immediately needs to know what's on the other side?</p>
+                <p>Winter is coming.</p>
+                <p>... a mind needs books as a sword needs a whetstone, if it
+                    is to keep its edge.</p>
+                <p>Why is it that when one man builds a wall, the next man
+                    immediately needs to know what's on the other side?</p>
+                <p>Winter is coming.</p>
+                <p>... a mind needs books as a sword needs a whetstone, if it
+                    is to keep its edge.</p>
+            </div>
+        </div>
 
-				<section class="container mt-5 text-white">
+        <div class="row d-flex flex-row-reverse my-5 bg-dark bg-opacity-75">
+            <div class="col-5 p-3 my-auto">
+                <img src="/images/index/image2.jpg" alt="Image of the team">
+            </div>
+            <div class="col-7 p-3">
+                <p>Why is it that when one man builds a wall, the next man
+                    immediately needs to know what's on the other side?</p>
+                <p>Winter is coming.</p>
+                <p>... a mind needs books as a sword needs a whetstone, if it
+                    is to keep its edge.</p>
+                <p>Why is it that when one man builds a wall, the next man
+                    immediately needs to know what's on the other side?</p>
+                <p>Winter is coming.</p>
+                <p>... a mind needs books as a sword needs a whetstone, if it
+                    is to keep its edge.</p>
+            </div>
+        </div>
 
-					<div class="row my-5 bg-dark bg-opacity-75">
-						<div class="col-5 p-3 my-auto">
-							<img src="/images/index/team.png" alt="Image of the team">
-						</div>
-						<div class="col-7 p-3">
-							<p>Why is it that when one man builds a wall, the next man
-								immediately needs to know what's on the other side?</p>
-							<p>Winter is coming.</p>
-							<p>... a mind needs books as a sword needs a whetstone, if it
-								is to keep its edge.</p>
-							<p>Why is it that when one man builds a wall, the next man
-								immediately needs to know what's on the other side?</p>
-							<p>Winter is coming.</p>
-							<p>... a mind needs books as a sword needs a whetstone, if it
-								is to keep its edge.</p>
-						</div>
-					</div>
 
-					<div class="row d-flex flex-row-reverse my-5 bg-dark bg-opacity-75">
-						<div class="col-5 p-3 my-auto">
-							<img src="/images/index/image2.jpg" alt="Image of the team">
-						</div>
-						<div class="col-7 p-3">
-							<p>Why is it that when one man builds a wall, the next man
-								immediately needs to know what's on the other side?</p>
-							<p>Winter is coming.</p>
-							<p>... a mind needs books as a sword needs a whetstone, if it
-								is to keep its edge.</p>
-							<p>Why is it that when one man builds a wall, the next man
-								immediately needs to know what's on the other side?</p>
-							<p>Winter is coming.</p>
-							<p>... a mind needs books as a sword needs a whetstone, if it
-								is to keep its edge.</p>
-						</div>
-					</div>
-
-					<div class="row my-5 bg-dark bg-opacity-75">
-						<div class="col-5 p-3 my-auto">
-							<img src="/images/index/image1.jpg" alt="Image of the team">
-						</div>
-						<div class="col-7 p-3">
-							<p>Why is it that when one man builds a wall, the next man
-								immediately needs to know what's on the other side?</p>
-							<p>Winter is coming.</p>
-							<p>... a mind needs books as a sword needs a whetstone, if it
-								is to keep its edge.</p>
-							<p>Why is it that when one man builds a wall, the next man
-								immediately needs to know what's on the other side?</p>
-							<p>Winter is coming.</p>
-							<p>... a mind needs books as a sword needs a whetstone, if it
-								is to keep its edge.</p>
-						</div>
-					</div>
-				</section>
-			</div>
-
-		</section>
-	</div>
+        <div class="row my-5 bg-dark bg-opacity-75">
+            <div class="col-5 p-3 my-auto">
+                <img src="/images/index/image1.jpg" alt="Image of the team">
+            </div>
+            <div class="col-7 p-3">
+                <p>Why is it that when one man builds a wall, the next man
+                    immediately needs to know what's on the other side?</p>
+                <p>Winter is coming.</p>
+                <p>... a mind needs books as a sword needs a whetstone, if it
+                    is to keep its edge.</p>
+                <p>Why is it that when one man builds a wall, the next man
+                    immediately needs to know what's on the other side?</p>
+                <p>Winter is coming.</p>
+                <p>... a mind needs books as a sword needs a whetstone, if it
+                    is to keep its edge.</p>
+            </div>
+        </div>
+    </section>
+</div>
 </body>
 </html>
