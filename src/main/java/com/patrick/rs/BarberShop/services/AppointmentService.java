@@ -74,7 +74,13 @@ public class AppointmentService {
        appointmentRepo.save(appointment);
        return appointment;
    }
+
    public void save(Appointment appointment){
        appointmentRepo.save(appointment);
    }
+
+    public void delete(long id){
+        appointmentRepo.deleteById(id);
+    }
 }
+
