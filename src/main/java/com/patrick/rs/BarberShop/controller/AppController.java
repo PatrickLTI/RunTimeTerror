@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -100,6 +101,7 @@ public class AppController {
         Map<Boolean, List<Appointment>> appointments = appointmentService
                 .getAll()
                 .stream()
+                .sorted(Comparator.comparing(a -> a.getAppDate().toString() + a.getAppTime()))
                 .collect(Collectors.partitioningBy(appointment -> appointment.getAppDate().before(new Date(System.currentTimeMillis()))));
 
         model.addAttribute("pastAppointments", appointments.get(true));
