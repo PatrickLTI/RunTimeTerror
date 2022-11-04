@@ -84,7 +84,7 @@ public class AppController {
         }
     }
 
-	@GetMapping("/dashboard")
+	@GetMapping("/userdashboard")
 	public String showDashboard(Model model){
         List<Appointment> listAppoints= appointmentService.getAll();
         model.addAttribute("listAppoints", listAppoints);
@@ -103,7 +103,7 @@ public class AppController {
     }
 
 
-    @PostMapping("/dashboard/edit_appoint/save")
+    @PostMapping("/edit_appoint/save")
     public String updateAppointment(@ModelAttribute("appointment") Appointment appointment){
         appointmentService.save(appointment);
         return "userdashboard";

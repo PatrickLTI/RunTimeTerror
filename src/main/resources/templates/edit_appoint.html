@@ -41,27 +41,27 @@
     <section>
         <div class="container">
 
-            <form  th:action="@{'/edit_appoint/save/' + ${appointment.id}}" th:object="${appointment}"
+            <form  th:action="@{'/edit_appoint/save'}" th:object="${appointment}"
                   method="post" style="max-width: 600px; margin: 10em auto;">
                 <div class="m-2 row">
-                    <label class="col-4 col-form-label" for="fullName">Appointment ID: </label>
+                    <label class="col-4 col-form-label" for="id">Appointment ID: </label>
                     <div class="col-12">
-                        <input type="text" th:field="*{id}" class="form-control" readonly="readonly" disabled/>
+                        <input type="text" th:field="*{id}" class="form-control" readonly="readonly"/>
                     </div>
                     <label class="col-4 col-form-label" for="fullName">Client
                         Name: </label>
                     <div class="col-12">
-                        <input type="text" th:field="*{fullName}" class="form-control"  disabled readonly="readonly"/>
+                        <input type="text" th:field="*{fullName}" class="form-control"  readonly="readonly"/>
                     </div>
                     <label class="col-4 col-form-label" for="email">Email: </label>
                     <div class="col-12">
-                        <input type="email" th:field="*{email}" class="form-control" disabled readonly="readonly" />
+                        <input type="email" th:field="*{email}" class="form-control" readonly="readonly" />
                     </div>
-                    <label class="col-4 col-form-label" for="phoneNumber">Phone
+                    <label class="col-4 col-form-label" for="phoneNumber" readonly="readonly">Phone
                         Number: </label>
                     <div class="col-12">
                         <input type="number" th:field="*{phoneNumber}"
-                               class="form-control" disabled readonly="readonly"/>
+                               class="form-control" />
                     </div>
                     <label class="col-4 col-form-label" for="appDate">Appointment
                         Date: </label>
