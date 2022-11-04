@@ -91,7 +91,7 @@
                 </td>
                 <td>
                     <button type="button" class="btn btn-link btn-sm btn-rounded">
-                        <a th:href="@{'/edit_appoint/' + ${appoint.id}}">Edit</a>
+                        <a th:href="@{'/dashboard/edit_appoint/' + ${appoint.id}}">Edit</a>
                         &nbsp;&nbsp;&nbsp; <a th:href="@{'/delete_appoint/' + ${appoint.id}}">Delete</a>
                     </button>
                 </td>
@@ -140,6 +140,5 @@
         </table>
     </div>
 </div>
-<script th:src="@{/js/calendar.js}"></script>
 </body>
 </html>
