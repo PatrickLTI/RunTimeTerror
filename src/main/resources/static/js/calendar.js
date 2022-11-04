@@ -3,7 +3,7 @@ let calendar = document.querySelector('.calendar')
 const month_names = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
 isLeapYear = (year) => {
-    return (year % 4 === 0 && year % 100 !== 0 && year % 400 !== 0) || (year % 100 === 0 && year % 400 ===0)
+    return (year % 4 === 0 && year % 100 !== 0 && year % 400 !== 0) || (year % 100 === 0 && year % 400 === 0)
 }
 
 getFebDays = (year) => {
@@ -20,7 +20,7 @@ generateCalendar = (month, year) => {
     calendar_days.innerHTML = ''
 
     let currDate = new Date()
-    if (!month) month = currDate.getMonth()
+    if (month !== 0 && !month) month = currDate.getMonth()
     if (!year) year = currDate.getFullYear()
 
     let curr_month = `${month_names[month]}`
@@ -28,11 +28,22 @@ generateCalendar = (month, year) => {
     calendar_header_year.innerHTML = year
 
     // get first day of month
-
     let first_day = new Date(year, month, 1)
 
     for (let i = 0; i <= days_of_month[month] + first_day.getDay() - 1; i++) {
         let day = document.createElement('div')
+        day.classList.add('div-day')
+        day.addEventListener('click', () => {
+            //alert(year + ' ' + month + ' ' + (i - first_day.getDay() + 1))
+            document.querySelectorAll('.div-day.rounded-circle').forEach(el => {
+                el.classList.remove(('bg-info'))
+                el.classList.remove(('rounded-circle'))
+
+            })
+            day.classList.add('bg-info')
+            day.classList.add('rounded-circle')
+            // $('.')
+        });
         if (i >= first_day.getDay()) {
             day.classList.add('calendar-day-hover')
             day.innerHTML = i - first_day.getDay() + 1
