@@ -83,7 +83,7 @@
                 <td th:text="${appoint.id}">
                     <p class="fw-normal mb-1">Appointment ID</p>
                 </td>
-                <td th:text="${appoint.appDate}">
+                <td th:text="${appoint.appDate.toString().substring(0, 10)}">
                     <p class="fw-normal mb-1">Appointment Date</p>
                 </td>
                 <td th:text="${appoint.appTime}">
@@ -119,8 +119,8 @@
                 <th>Appintment Time</th>
             </tr>
             </thead>
-            <tbody>
-            <tr th:each="pastAppoint:${listPastAppoints}">
+            <tbody >
+            <tr th:each="pastAppoint:${listPastAppoints}" th:if="${pastAppoint.getAppDate().getTime() < T(java.lang.System).currentTimeMillis()}">
                 <td th:text="${pastAppoint.fullName}">
                     <div class="d-flex align-items-center">
                         <p class="fw-bold mb-1"> Client Name</p>
