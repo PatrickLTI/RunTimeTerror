@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -44,7 +45,11 @@ public class AppController {
 		return "login";
 	}
 	
-
+	@GetMapping("logout")
+    public String logout() {
+        SecurityContextHolder.getContext().setAuthentication(null);
+        return "redirect:/";
+    }
 
 	@RequestMapping("/registration")
 	public String showRegistration(Model model) {
