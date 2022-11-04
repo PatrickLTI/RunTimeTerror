@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.patrick.rs.BarberShop.model.Appointment;
+import com.patrick.rs.BarberShop.model.CustomUserDetails;
 import com.patrick.rs.BarberShop.model.User;
 import com.patrick.rs.BarberShop.services.AppointmentService;
 import com.patrick.rs.BarberShop.services.UserService;
@@ -118,9 +119,18 @@ public class AppController {
 
     @GetMapping("/userdashboard")
     public String showDashboard(Model model) {
-    	if (SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(new SimpleGrantedAuthority("admin"))) {
+    	
+    	CustomUserDetails user =  (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	
+    	if (user.isAdmin()) {
     		return "redirect:/admindashboard";
     	}
+    	
+		/*
+		 * if (SecurityContextHolder.getContext().getAuthentication().getAuthorities().
+		 * contains(new SimpleGrantedAuthority("admin"))) { return
+		 * "redirect:/admindashboard"; }
+		 */
         List<Appointment> listAppoints = appointmentService.getAll();
         model.addAttribute("listAppoints", listAppoints);
 
