@@ -46,6 +46,8 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain1(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
+                .antMatchers("/admindashboard")
+                .hasAuthority("admin")
                 .antMatchers("/userdashboard")
                 .authenticated()
                 .antMatchers("/")
