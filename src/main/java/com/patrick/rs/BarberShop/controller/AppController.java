@@ -103,13 +103,10 @@ public class AppController {
     }
 
     @PostMapping("/dashboard/edit_appoint/save")
-    public String updateAppointment(@PathVariable(name = "id") long id, @ModelAttribute("appointment") Appointment appointment){
-        appointmentService.update(id, appointment);
+    public String updateAppointment(@ModelAttribute("appointment") Appointment appointment){
+        appointmentService.save(appointment);
         return "userdashboard";
     }
-//    @RequestMapping("/save_appoint" ,method= RequestMethod.POST)
-//    public String saveAppointment()
-
 
 	@GetMapping("/appointment")
 	public String bookAppointment(Appointment appointment)
