@@ -98,8 +98,7 @@ public class AppController {
 
     @GetMapping("/admindashboard")
     public String showAdminDashboard(Model model) {
-        Map<Boolean, List<Appointment>> appointments = appointmentService
-                .getAll()
+        Map<Boolean, List<Appointment>> appointments = appointmentService.getAll()
                 .stream()
                 .sorted(Comparator.comparing(a -> a.getAppDate().toString() + a.getAppTime()))
                 .collect(Collectors.partitioningBy(appointment -> appointment.getAppDate().before(new Date(System.currentTimeMillis()))));
