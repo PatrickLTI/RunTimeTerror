@@ -5,7 +5,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,10 +15,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.patrick.rs.BarberShop.model.Appointment;
 import com.patrick.rs.BarberShop.model.User;
-import com.patrick.rs.BarberShop.repositories.AppointmentRepo;
 import com.patrick.rs.BarberShop.services.AppointmentService;
 import com.patrick.rs.BarberShop.services.UserService;
 
@@ -41,8 +40,11 @@ public class AppController {
 	public String showLogin(Model model) {
 		User user = new User();
 		model.addAttribute("user", user);
+		
 		return "login";
 	}
+	
+
 
 	@RequestMapping("/registration")
 	public String showRegistration(Model model) {
@@ -57,7 +59,7 @@ public class AppController {
 	}
 
 	@PostMapping(value = "/registerUser")
-	public String registerUsers(@Valid User user, Errors errors, Model model, BindingResult bindingResult) {
+	public String registerUsers(@Valid User user, Errors errors, Model model, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
 		if (user.getPassword() != null && user.getSimplePassword() != null) {
 			if (!user.getPassword().equals(user.getSimplePassword())) {
@@ -73,9 +75,22 @@ public class AppController {
 		}
 
 		else {
-
-			userService.save(user);
-			return "new_users";
+			
+			
+			try {
+				userService.create(user);
+			} catch (Exception e) {
+				if (e.getMessage() == UserService.EMAIL_TAKEN) {
+					bindingResult.addError(new FieldError("user", "email", "Email taken."));
+				}
+				if (e.getMessage() == UserService.PHONENUMBER_TAKEN) {
+					bindingResult.addError(new FieldError("user", "phoneNumber", "Phone number taken."));
+				}
+				return "registration";
+			}
+			redirectAttributes.addAttribute("newUser", "true");
+            return "redirect:/login";
+			
 
 		}
 	}

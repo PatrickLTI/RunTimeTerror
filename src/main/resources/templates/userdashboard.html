@@ -1,175 +1,183 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout}">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
 <head>
-    <style>
-        body {
-            background-image: url("/images/dashboardBg.jpeg");
-            background-repeat: no-repeat;
-            background-position: 70% 70%;
-            background-size: cover;
-            font-family: "Georgia", Times, serif;
-        }
-    </style>
-    <meta charset="UTF-8">
-    <title>User Dashboard</title>
-    <link rel="stylesheet" th:href="@{/css/calendar.css}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+body {
+	background-image: url("/images/dashboardBg.jpeg");
+	background-repeat: no-repeat;
+	background-position: 70% 70%;
+	background-size: cover;
+	font-family: "Georgia", Times, serif;
+}
+</style>
+<meta charset="UTF-8">
+<title>User Dashboard</title>
+<link rel="stylesheet" th:href="@{/css/calendar.css}">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
-<div layout:fragment="content" class="container">
-    <!-- Button trigger modal -->
-    <div class="book-wrapper mb-5">
-        <div class="inner text-center mt-5 justify-content-center">
-            <p class="text-white mt-5">Xpression Kutz BARBERSHOP</p>
-            <h1 class="text-uppercase text-warning mt-5">book new appointment</h1>
-            <button type="button" class="w3-xxxlarge btn btn-outline-warning rounded-circle px-4 py-2 mt-5"
-                    data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <i class="fa-regular fa-calendar-days"></i>
-            </button>
-        </div>
+	<div layout:fragment="content" class="container">
+		<!-- Button trigger modal -->
+		<div class="book-wrapper mb-5">
+			<div class="inner text-center mt-5 justify-content-center">
+				<p class="text-white mt-5">Xpression Kutz BARBERSHOP</p>
+				<h1 class="text-uppercase text-warning mt-5">book new
+					appointment</h1>
+				<button type="button"
+					class="w3-xxxlarge btn btn-outline-warning rounded-circle px-4 py-2 mt-5"
+					data-bs-toggle="modal" data-bs-target="#exampleModal">
+					<i class="fa-regular fa-calendar-days"></i>
+				</button>
+			</div>
 
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Book Appointment</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="m-2 row">
-                                <label class="col-4 col-form-label" for="fullName">Full
-                                    Name: </label>
-                                <div class="col-12">
-                                    <input type="text" class="form-control"/>
-                                </div>
+			<!-- Modal -->
+			<div class="modal fade" id="exampleModal" tabindex="-1"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5" id="exampleModalLabel">Book
+								Appointment</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<form>
+								<div class="m-2 row">
+									<label class="col-4 col-form-label" for="fullName">Full
+										Name: </label>
+									<div class="col-12">
+										<input type="text" class="form-control" />
+									</div>
 
-                                <label class="col-4 col-form-label" for="email">Email: </label>
-                                <div class="col-12">
-                                    <input type="email" class="form-control"/>
-                                </div>
+									<label class="col-4 col-form-label" for="email">Email:
+									</label>
+									<div class="col-12">
+										<input type="email" class="form-control" />
+									</div>
 
-                                <label class="col-4 col-form-label" for="phoneNumber">Phone
-                                    Number: </label>
-                                <div class="col-12">
-                                    <input type="number" class="form-control"/>
-                                </div>
+									<label class="col-4 col-form-label" for="phoneNumber">Phone
+										Number: </label>
+									<div class="col-12">
+										<input type="number" class="form-control" />
+									</div>
 
-                                <label class="col-4 col-form-label" for="appDate">Appointment
-                                    Date: </label>
-                                <div class="col-12">
-                                    <input type="date" class="form-control"/>
-                                </div>
+									<label class="col-4 col-form-label" for="appDate">Appointment
+										Date: </label>
+									<div class="col-12">
+										<input type="date" class="form-control" />
+									</div>
 
-                                <label class="col-4 col-form-label" for="appTime">Appointment
-                                    Time: </label>
-                                <div class="col-12">
-                                    <input type="time"  class="form-control"/>
-                                </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--    upcoming appointment-->
-    <div class="mt-5 rounded">
-        <nav class="navbar bg-light rounded-top">
-            <div class="container-fluid justify-content-center">
-                <a class="navbar-brand fw-bold mb-1" href="#">
-                    <img src="images/logoV1.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-">
-                    Upcoming Appointment
-                </a>
-            </div>
-        </nav>
-        <table class="table align-middle text-center mb-0 bg-white rounded-top">
-            <thead class="bg-light">
-            <tr>
-                <th>Client Name</th>
-                <th>Appointment ID</th>
-                <th>Appintment Date</th>
-                <th>Appintment Time</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="appoint:${listAppoints}">
-                <td th:text="${appoint.fullName}">
-                    <div class="d-flex align-items-center">
-                        <p class="fw-bold mb-1"> Client Name</p>
-                    </div>
-                </td>
-                <td th:text="${appoint.id}">
-                    <p class="fw-normal mb-1">Appointment ID</p>
-                </td>
-                <td th:text="${appoint.appDate.toString().substring(0, 10)}">
-                    <p class="fw-normal mb-1">Appointment Date</p>
-                </td>
-                <td th:text="${appoint.appTime}">
-                    <p class="fw-normal mb-1">Appointment Time</p>
-                </td>
-                <td>
-                    <button type="button" class="btn btn-secondary">
-                        <a class="text-white" th:href="@{'/edit_appoint/' + ${appoint.id}}">Edit</a>&nbsp;
-                    </button>
-                    <button class="btn btn-secondary text-white">
-                        <a class="text-white" th:href="@{'/delete_appoint/' + ${appoint.id}}">Delete</a>
-                    </button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+									<label class="col-4 col-form-label" for="appTime">Appointment
+										Time: </label>
+									<div class="col-12">
+										<input type="time" class="form-control" />
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-bs-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary">Save
+								changes</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--    upcoming appointment-->
+		<div class="mt-5 rounded">
+			<nav class="navbar bg-light rounded-top">
+				<div class="container-fluid justify-content-center">
+					<a class="navbar-brand fw-bold mb-1" href="#"> <img
+						src="images/logoV1.png" alt="Logo" width="30" height="30"
+						class="d-inline-block align-text-"> Upcoming Appointment
+					</a>
+				</div>
+			</nav>
+			<table
+				class="table align-middle text-center mb-0 bg-white rounded-top">
+				<thead class="bg-light">
+					<tr>
+						<th>Client Name</th>
+						<th>Appointment ID</th>
+						<th>Appointment Date</th>
+						<th>Appointment Time</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="appoint:${listAppoints}">
+						<td th:text="${appoint.fullName}">
+							<div class="d-flex align-items-center">
+								<p class="fw-bold mb-1">Client Name</p>
+							</div>
+						</td>
+						<td th:text="${appoint.id}">
+							<p class="fw-normal mb-1">Appointment ID</p>
+						</td>
+						<td th:text="${appoint.appDate.toString().substring(0, 10)}">
+							<p class="fw-normal mb-1">Appointment Date</p>
+						</td>
+						<td th:text="${appoint.appTime}">
+							<p class="fw-normal mb-1">Appointment Time</p>
+						</td>
+						<td><a class="text-white btn btn-primary"
+							th:href="@{'/edit_appoint/' + ${appoint.id}}">Edit</a>&nbsp; <a
+							class="text-white btn btn-primary"
+							th:href="@{'/delete_appoint/' + ${appoint.id}}">Delete</a>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 
-    <!--    past appointment-->
-    <div class="mt-5 rounded">
-        <nav class="navbar bg-light rounded-top">
-            <div class="container-fluid justify-content-center">
-                <a class="navbar-brand fw-bold mb-1" href="#">
-                    <img src="images/logoV1.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-">
-                    Past Appointment
-                </a>
-            </div>
-        </nav>
-        <table class="table align-middle text-center mb-0 bg-white rounded-top">
-            <thead class="bg-light">
-            <tr>
-                <th>Client Name</th>
-                <th>Appointment ID</th>
-                <th>Appintment Date</th>
-                <th>Appintment Time</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="pastAppoint:${listPastAppoints}"
-                th:if="${pastAppoint.getAppDate().getTime() < T(java.lang.System).currentTimeMillis()}">
-                <td th:text="${pastAppoint.fullName}">
-                    <div class="d-flex align-items-center">
-                        <p class="fw-bold mb-1"> Client Name</p>
-                    </div>
-                </td>
-                <td th:text="${pastAppoint.id}">
-                    <p class="fw-normal mb-1">Appointment ID</p>
-                </td>
-                <td th:text="${pastAppoint.appDate.toString().substring(0, 10)}">
-                    <p class="fw-normal mb-1">Appointment Date</p>
-                </td>
-                <td th:text="${pastAppoint.appTime}">
-                    <p class="fw-normal mb-1">Appointment Time</p>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+		<!--    past appointment-->
+		<div class="mt-5 rounded">
+			<nav class="navbar bg-light rounded-top">
+				<div class="container-fluid justify-content-center">
+					<a class="navbar-brand fw-bold mb-1" href="#"> <img
+						src="images/logoV1.png" alt="Logo" width="30" height="30"
+						class="d-inline-block align-text-"> Past Appointment
+					</a>
+				</div>
+			</nav>
+			<table
+				class="table align-middle text-center mb-0 bg-white rounded-top">
+				<thead class="bg-light">
+					<tr>
+						<th>Client Name</th>
+						<th>Appointment ID</th>
+						<th>Appointment Date</th>
+						<th>Appointment Time</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="pastAppoint:${listPastAppoints}"
+						th:if="${pastAppoint.getAppDate().getTime() < T(java.lang.System).currentTimeMillis()}">
+						<td th:text="${pastAppoint.fullName}">
+							<div class="d-flex align-items-center">
+								<p class="fw-bold mb-1">Client Name</p>
+							</div>
+						</td>
+						<td th:text="${pastAppoint.id}">
+							<p class="fw-normal mb-1">Appointment ID</p>
+						</td>
+						<td th:text="${pastAppoint.appDate.toString().substring(0, 10)}">
+							<p class="fw-normal mb-1">Appointment Date</p>
+						</td>
+						<td th:text="${pastAppoint.appTime}">
+							<p class="fw-normal mb-1">Appointment Time</p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </body>
 </html>
