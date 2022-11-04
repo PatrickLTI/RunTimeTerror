@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +16,7 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -38,6 +40,8 @@ public class Appointment {
 		@Digits(message="Cellphone must be exactly 10 charcaters", fraction = 0, integer = 10)
 		private String phoneNumber;
 		
+		
+		@NotNull
 		@FutureOrPresent
 	    @DateTimeFormat(pattern = "yyyy-MM-dd")
 		private Date appDate;
