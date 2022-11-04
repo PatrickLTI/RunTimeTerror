@@ -24,109 +24,119 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(name = "Appointment")
 public class Appointment {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+
+	@NotBlank
+	@Email(message = "Please enter a valid email address")
+	private String email;
+
+	@Size(min = 2, max = 20)
+	private String fullName;
+
+	@NotBlank
+	@Digits(message = "Cellphone must be exactly 10 charcaters", fraction = 0, integer = 10)
+	private String phoneNumber;
+
+	@NotNull
+	@FutureOrPresent
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date appDate;
+
+	@NotBlank
+	private String appTime;
+
+	private AppointmentStatus status = AppointmentStatus.Booked;
+
+	private Timestamp createdAt = new Timestamp(System.currentTimeMillis());
+
+	@ManyToOne
+	@JoinColumn(name = "user_id", nullable = true) 
+	private User user;
 	
-	    @Id
-		@GeneratedValue(strategy=GenerationType.AUTO)
-		private Long id;
-		
-	    @NotBlank
-		@Email(message = "Please enter a valid email address")
-		private String email;
-		
-		@Size(min = 2, max = 20)
-		private String fullName;
-		
-		@NotBlank
-		@Digits(message="Cellphone must be exactly 10 charcaters", fraction = 0, integer = 10)
-		private String phoneNumber;
-		
-		
-		@NotNull
-		@FutureOrPresent
-	    @DateTimeFormat(pattern = "yyyy-MM-dd")
-		private Date appDate;
-		
-		@NotBlank
-		private String appTime;
-		
-		private AppointmentStatus status = AppointmentStatus.Booked;
-		
-		private Timestamp createdAt = new Timestamp(System.currentTimeMillis());
-		
-//		@ManyToOne
-//		@JoinColumn(name="id", nullable= false)
-//        private User user;
-		
 	
-		public Long getId() {
-			return id;
-		}
 
-		public String getEmail() {
-			return email;
-		}
+	public Long getId() {
+		return id;
+	}
 
-		public String getFullName() {
-			return fullName;
-		}
+	public String getEmail() {
+		return email;
+	}
 
-		public Date getAppDate() {
-			return appDate;
-		}
+	public String getFullName() {
+		return fullName;
+	}
 
-		public String getAppTime() {
-			return appTime;
-		}
+	public Date getAppDate() {
+		return appDate;
+	}
 
-		public Timestamp getCreatedAt() {
-			return createdAt;
-		}
+	public String getAppTime() {
+		return appTime;
+	}
 
-		public void setId(Long id) {
-			this.id = id;
-		}
+	public Timestamp getCreatedAt() {
+		return createdAt;
+	}
 
-		public void setEmail(String email) {
-			this.email = email;
-		}
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-		public void setFullName(String fullName) {
-			this.fullName = fullName;
-		}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-		public void setAppDate(Date appDate) {
-			this.appDate = appDate;
-		}
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
 
-		public void setAppTime(String appTime) {
-			this.appTime = appTime;
-		}
+	public void setAppDate(Date appDate) {
+		this.appDate = appDate;
+	}
 
-		public void setCreatedAt(Timestamp createdAt) {
-			this.createdAt = createdAt;
-		}
+	public void setAppTime(String appTime) {
+		this.appTime = appTime;
+	}
 
-		public AppointmentStatus getStatus() {
-			return status;
-		}
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
 
-		public void setStatus(AppointmentStatus status) {
-			this.status = status;
-		}
+	public AppointmentStatus getStatus() {
+		return status;
+	}
 
-		public String getPhoneNumber() {
-			return phoneNumber;
-		}
+	public void setStatus(AppointmentStatus status) {
+		this.status = status;
+	}
 
-		public void setPhoneNumber(String phoneNumber) {
-			this.phoneNumber = phoneNumber;
-		}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
 
-		@Override
-		public String toString() {
-			return "Appointment [id=" + id + ", email=" + email + ", fullName=" + fullName + ", phoneNumber="
-					+ phoneNumber + ", appDate=" + appDate + ", appTime=" + appTime + ", status=" + status
-					+ ", createdAt=" + createdAt + "]";
-		}		
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	@Override
+	public String toString() {
+		return "Appointment [id=" + id + ", email=" + email + ", fullName=" + fullName + ", phoneNumber=" + phoneNumber
+				+ ", appDate=" + appDate + ", appTime=" + appTime + ", status=" + status + ", createdAt=" + createdAt
+				+ ", user=" + user + "]";
+	}
 
 }

@@ -1,12 +1,14 @@
 package com.patrick.rs.BarberShop.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -55,6 +57,9 @@ public class User {
 	@Column(nullable = false, updatable = false)
 	@CreationTimestamp
 	private Date createdAt;
+	
+	@OneToMany
+	private List<Appointment> appointments;
 
 	public Long getId() {
 		return id;
@@ -128,11 +133,22 @@ public class User {
 		this.encryptedPassword = encryptedPassword;
 	}
 
+
+
+	public List<Appointment> getAppointments() {
+		return appointments;
+	}
+
+	public void setAppointments(List<Appointment> appointments) {
+		this.appointments = appointments;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", fullName=" + fullName + ", phoneNumber=" + phoneNumber
 				+ ", simplePassword=" + simplePassword + ", password=" + password + ", encryptedPassword="
-				+ encryptedPassword + ", isAdmin=" + isAdmin + ", createdAt=" + createdAt + "]";
+				+ encryptedPassword + ", isAdmin=" + isAdmin + ", createdAt=" + createdAt + ", appointments="
+				+ appointments + "]";
 	}
 
 }

@@ -22,6 +22,8 @@ public class CustomUserDetails implements UserDetails {
         authorities.add(new SimpleGrantedAuthority(user.isAdmin() ? "admin" : "user"));
         return authorities;
     }
+    
+   
 
     public long getId() {
         return user.getId();
@@ -72,4 +74,8 @@ public class CustomUserDetails implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+	public User getUser() {
+		return user;
+	}
 }
