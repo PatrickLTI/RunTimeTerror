@@ -129,6 +129,7 @@ public class AppController {
 		 * contains(new SimpleGrantedAuthority("admin"))) { return
 		 * "redirect:/admindashboard"; }
 		 */
+
 		List<Appointment> listAppoints = appointmentService.findByUserId(user.getId());
 		model.addAttribute("listAppoints", listAppoints);
 

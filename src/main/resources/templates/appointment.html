@@ -36,15 +36,64 @@
 
 <body>
 <div layout:fragment="content">
-
     <section>
         <div class="container">
-
+            <!--authentication welcome info-->
+            <div class="text-center mt-3" th:if="${#request.userPrincipal}" >
+                <h2 class="text-white"> Hello, [[${#request.userPrincipal.principal.getUser().getFullName()}]]</h2>
+                <p class="text-white"> Welcome to Xpression Kutz BARBERSHOP</p>
+            </div>
+            <!---->
             <form th:action="@{/appointment}" th:object="${appointment}"
-                  method="post" style="max-width: 600px; margin: 10em auto;">
-                <div class="m-2 row">
+                  method="post" style="max-width: 600px; margin: 3em auto;">
+                <!-- user authentication -->
+                <div class="m-2 row" th:if="${#request.userPrincipal}">
                     <label class="col-4 col-form-label" for="fullName">Full
                         Name: </label>
+                    <div class="col-12">
+                        <input type="text" th:value="${#request.userPrincipal.principal.getUser().getFullName()}" class="form-control" readonly="readonly"/>
+                    </div>
+
+                    <label class="col-4 col-form-label" for="email">Email: </label>
+                    <div class="col-12">
+                        <input type="email" th:value="${#request.userPrincipal.principal.getUser().getEmail()}" class="form-control"  readonly="readonly"/>
+                    </div>
+
+                    <label class="col-4 col-form-label" for="phoneNumber">Phone
+                        Number: </label>
+                    <div class="col-12">
+                        <input type="number" th:value="${#request.userPrincipal.principal.getUser().getPhoneNumber()} "  readonly="readonly"
+                               class="form-control"/>
+                    </div>
+
+                    <label class="col-4 col-form-label" for="appDate">Appointment
+                        Date: </label>
+                    <div class="col-12">
+                        <input type="date" th:field="*{appDate}" class="form-control"/>
+                    </div>
+                    <div>
+                        <p class="alert alert-danger"
+                           th:if="${#fields.hasErrors('appDate')}" th:errors="*{appDate}">
+                    </div>
+                    <label class="col-4 col-form-label" for="appTime">Appointment
+                        Time: </label>
+                    <div class="col-12">
+                        <input type="time" th:field="*{appTime}" class="form-control"/>
+                    </div>
+                    <div>
+                        <p class="alert alert-danger"
+                           th:if="${#fields.hasErrors('appTime')}" th:errors="*{appTime}">
+                    </div>
+
+                    <div class="m-3 text-center">
+                        <button type="submit" class="btn btn-primary">Book</button>
+                    </div>
+                </div>
+                <!-- authentication part end-->
+                <div class="m-2 row" th:if="${#request.userPrincipal==null}">
+                    <label class="col-4 col-form-label" for="fullName">Full
+                        Name: </label>
+
                     <div class="col-12">
                         <input type="text" th:field="*{fullName}" class="form-control"/>
                     </div>
