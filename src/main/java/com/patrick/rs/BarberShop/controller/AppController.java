@@ -133,7 +133,7 @@ public class AppController {
 		List<Appointment> listAppoints = appointmentService.findByUserId(user.getId());
 		model.addAttribute("listAppoints", listAppoints);
 
-		List<Appointment> listPastAppoints = appointmentService.getAll();
+		List<Appointment> listPastAppoints = appointmentService.findByUserId(user.getId());
 		model.addAttribute("listPastAppoints", listPastAppoints);
 
 		return "userdashboard";
@@ -164,7 +164,18 @@ public class AppController {
 
 	@GetMapping("/appointment")
 	public String bookAppointment(Model model) {
-		model.addAttribute("appointment", new Appointment());
+			model.addAttribute("appointment", new Appointment());
+			return "appointment";
+	}
+
+	@GetMapping("/appointment/{id}")
+	public String showBookAppointmentByUser(@PathVariable(name = "id") long id, Model model){
+		Appointment appointment = new Appointment();
+		appointment.setUser(userService.findById(id));
+		appointment.setFullName(userService.findById(id).getFullName());
+		appointment.setEmail(userService.findById(id).getEmail());
+		appointment.setPhoneNumber(userService.findById(id).getPhoneNumber());
+		model.addAttribute("appointment", appointment);
 		return "appointment";
 	}
 
@@ -179,8 +190,7 @@ public class AppController {
 
 			CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
 					.getPrincipal();
-			appointment.setUser(user.getUser());
-
+//			appointment.setUser(user.getUser());
 			appointmentService.save(appointment);
 			return "redirect:/userdashboard";
 

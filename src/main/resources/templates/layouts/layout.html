@@ -88,7 +88,10 @@
             </ul>
             <ul class="navbar-nav flex-grow-1 justify-content-end">
                 <li class="nav-item">
-                    <a class="nav-link border mx-4" th:href="@{/appointment}">Book an appointment</a>
+                    <a class="nav-link border mx-4" th:if="${#request.userPrincipal}==null" th:href="@{/appointment}">Book an appointment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link border mx-4" th:if="${#request.userPrincipal}" th:href="@{'/appointment/' +${#request.userPrincipal.principal.getUser().getId()}}">Book an appointment</a>
                 </li>
             </ul>
         </div>

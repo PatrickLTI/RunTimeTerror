@@ -26,7 +26,10 @@ body {
 				<p class="text-white mt-5">Xpression Kutz BARBERSHOP</p>
 				<h1 class="text-uppercase text-warning mt-5">book new
 					appointment</h1>
-				<a class="w3-xxxlarge btn btn-outline-warning rounded-circle px-4 py-2 mt-5" th:href="@{/appointment}"> <i class="fa-regular fa-calendar-days"></i></a>
+				<a class="w3-xxxlarge btn btn-outline-warning rounded-circle px-4 py-2 mt-5"
+				   th:href="@{'/appointment/' +${#request.userPrincipal.principal.getUser().getId()}}">
+					<i class="fa-regular fa-calendar-days"></i>
+				</a>
 			</div>
 		<!--    upcoming appointment-->
 		<div class="mt-5 rounded">
@@ -50,7 +53,7 @@ body {
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="appoint:${listAppoints}">
+					<tr th:each="appoint:${listAppoints}" th:if="${appoint.getAppDate().getTime() > T(java.lang.System).currentTimeMillis()}">
 						<td th:text="${appoint.fullName}">
 							<div class="d-flex align-items-center">
 								<p class="fw-bold mb-1">Client Name</p>
@@ -75,7 +78,7 @@ body {
 		</div>
 
 		<!--    past appointment-->
-		<div class="mt-5 rounded">
+		<div class="mt-5 rounded" >
 			<nav class="navbar bg-light rounded-top">
 				<div class="container-fluid justify-content-center">
 					<a class="navbar-brand fw-bold mb-1" href="#"> <img
