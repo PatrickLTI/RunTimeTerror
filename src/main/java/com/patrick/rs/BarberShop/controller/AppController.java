@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.patrick.rs.BarberShop.email.EmailSenderService;
 import com.patrick.rs.BarberShop.model.Appointment;
 import com.patrick.rs.BarberShop.model.CustomUserDetails;
 import com.patrick.rs.BarberShop.model.User;
@@ -36,6 +39,9 @@ public class AppController {
 
 	@Autowired
 	private AppointmentService appointmentService;
+
+	@Autowired
+	private EmailSenderService senderService;
 
 	@RequestMapping("/")
 	public String showIndex() {
@@ -67,6 +73,11 @@ public class AppController {
 	public String showPricePage() {
 		return "pricePage";
 	}
+	
+	@EventListener(ApplicationReadyEvent.class)
+	public void sendMail() {
+		senderService.sendEmail("kutzxpression@gmail.com", "this is Subject", "This is body of Email");
+	}
 
 	@PostMapping(value = "/registerUser")
 	public String registerUsers(@Valid User user, Errors errors, Model model, BindingResult bindingResult,
@@ -87,6 +98,7 @@ public class AppController {
 
 			try {
 				userService.create(user);
+				senderService.sendEmail(user.getEmail(), "Welcome!", "Thank you for registering with us!");
 			} catch (Exception e) {
 				if (e.getMessage() == UserService.EMAIL_TAKEN) {
 					bindingResult.addError(new FieldError("user", "email", "Email taken."));
