@@ -40,68 +40,65 @@
     <section>
         <div class="container">
             <!--authentication welcome info-->
-            <div class="text-center mt-3" th:if="${#request.userPrincipal}" >
+            <div class="text-center mt-3" th:if="${#request.userPrincipal}">
                 <h2 class="text-white"> Hello, [[${#request.userPrincipal.principal.getUser().getFullName()}]]</h2>
                 <p class="text-white"> Welcome to Xpression Kutz BARBERSHOP</p>
             </div>
             <!---->
-            <form   th:action="@{/appointment}" th:object="${appointment}"
+            <form th:action="@{/appointment}" th:object="${appointment}"
                   method="post" style="max-width: 600px; margin: 3em auto;">
                 <!-- user authentication (if user login)-->
-                <div class="m-2 row" th:if="${#request.userPrincipal}">
-                    <input type="text" th:field="*{user}" th:value="${#request.userPrincipal.principal.getUser().getId()}" class="form-control" hidden/>
-                    <label class="col-4 col-form-label" for="fullName">Full
-                        Name: </label>
-                    <div class="col-12">
-<<<<<<< HEAD
-                        <input type="text" th:field="*{fullName}" class="form-control" readonly="readonly"/>
-                    </div>
+                <!--                <div class="m-2 row" th:if="${#request.userPrincipal}">-->
+                <!--                    <input type="text" th:field="*{user}" th:value="${#request.userPrincipal.principal.getUser().getId()}" class="form-control" hidden/>-->
+                <!--                    <label class="col-4 col-form-label" for="fullName">Full-->
+                <!--                        Name: </label>-->
+                <!--                    <div class="col-12">-->
+                <!--                        <input type="text" th:field="*{fullName}" id="fullName" class="form-control" readonly="readonly"/>-->
+                <!--                    </div>-->
 
-                    <label class="col-4 col-form-label" for="email">Email: </label>
-                    <div class="col-12">
-                        <input type="email" th:field="*{email}" class="form-control"  readonly="readonly"/>
-                    </div>
+                <!--                    <label class="col-4 col-form-label" for="email">Email: </label>-->
+                <!--                    <div class="col-12">-->
+                <!--                        <input type="email" th:field="*{email}" class="form-control"  readonly="readonly"/>-->
+                <!--                    </div>-->
 
-                    <label class="col-4 col-form-label" for="phoneNumber">Phone
-                        Number: </label>
-                    <div class="col-12">
-                        <input type="number" th:field="*{phoneNumber}"  readonly="readonly"
-                               class="form-control"/>
-                    </div>
+                <!--                    <label class="col-4 col-form-label" for="phoneNumber">Phone-->
+                <!--                        Number: </label>-->
+                <!--                    <div class="col-12">-->
+                <!--                        <input type="number" th:field="*{phoneNumber}"  readonly="readonly"-->
+                <!--                               class="form-control"/>-->
+                <!--                    </div>-->
 
-                    <label class="col-4 col-form-label" for="appDate">Appointment
-                        Date: </label>
-                    <div class="col-12">
-                        <input type="date" th:field="*{appDate}" class="form-control"/>
-                    </div>
-                    <div>
-                        <p class="alert alert-danger"
-                           th:if="${#fields.hasErrors('appDate')}" th:errors="*{appDate}">
-                    </div>
-                    <label class="col-4 col-form-label" for="appTime">Appointment
-                        Time: </label>
-                    <div class="col-12">
-                        <input type="time" th:field="*{appTime}" class="form-control"/>
-                    </div>
-                    <div>
-                        <p class="alert alert-danger"
-                           th:if="${#fields.hasErrors('appTime')}" th:errors="*{appTime}">
-                    </div>
+                <!--                    <label class="col-4 col-form-label" for="appDate">Appointment-->
+                <!--                        Date: </label>-->
+                <!--                    <div class="col-12">-->
+                <!--                        <input type="date" th:field="*{appDate}" class="form-control"/>-->
+                <!--                    </div>-->
+                <!--                    <div>-->
+                <!--                        <p class="alert alert-danger"-->
+                <!--                           th:if="${#fields.hasErrors('appDate')}" th:errors="*{appDate}">-->
+                <!--                    </div>-->
+                <!--                    <label class="col-4 col-form-label" for="appTime">Appointment-->
+                <!--                        Time: </label>-->
+                <!--                    <div class="col-12">-->
+                <!--                        <input type="time" th:field="*{appTime}" class="form-control"/>-->
+                <!--                    </div>-->
+                <!--                    <div>-->
+                <!--                        <p class="alert alert-danger"-->
+                <!--                           th:if="${#fields.hasErrors('appTime')}" th:errors="*{appTime}">-->
+                <!--                    </div>-->
 
-                    <div class="m-3 text-center">
-                        <button type="submit" class="btn btn-primary">Book</button>
-                    </div>
-                </div>
+                <!--                    <div class="m-3 text-center">-->
+                <!--                        <button type="submit" class="btn btn-primary">Book</button>-->
+                <!--                    </div>-->
+                <!--                </div>-->
                 <!-- authentication part end-->
-                <div class="m-2 row" th:if="${#request.userPrincipal==null}">
+
+                <div class="m-2 row">
                     <label class="col-4 col-form-label" for="fullName">Full
                         Name: </label>
 
                     <div class="col-12">
-                        <input type="text" th:field="*{fullName}" class="form-control"/>
-=======
                         <input type="text" th:field="*{fullName}" id="fullName" class="form-control"/>
->>>>>>> master
                     </div>
                     <div>
                         <p class="alert alert-danger"

@@ -9,12 +9,8 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD
-import org.springframework.data.repository.query.Param;
-=======
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
->>>>>>> master
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -194,21 +190,13 @@ public class AppController {
 	}
 
 	@GetMapping("/appointment")
-	public String bookAppointment(Model model) {
-<<<<<<< HEAD
-			model.addAttribute("appointment", new Appointment());
-			return "appointment";
-	}
-
-	@GetMapping("/appointment/{id}")
-	public String showBookAppointmentByUser(@PathVariable(name = "id") long id, Model model){
-		Appointment appointment = new Appointment();
-		appointment.setUser(userService.findById(id));
-		appointment.setFullName(userService.findById(id).getFullName());
-		appointment.setEmail(userService.findById(id).getEmail());
-		appointment.setPhoneNumber(userService.findById(id).getPhoneNumber());
-		model.addAttribute("appointment", appointment);
-=======
+	public String showBookAppointmentByUser(Model model){
+		// Appointment appointment = new Appointment();
+		// appointment.setUser(userService.findById(id));
+		// appointment.setFullName(userService.findById(id).getFullName());
+		// appointment.setEmail(userService.findById(id).getEmail());
+		// appointment.setPhoneNumber(userService.findById(id).getPhoneNumber());
+		// model.addAttribute("appointment", appointment);
 		Appointment appointment = new Appointment();
 		if(CustomUserDetails.isLoggedIn()){
 			User loggedInUser = CustomUserDetails.getCurrentUser();
@@ -217,7 +205,6 @@ public class AppController {
 			appointment.setPhoneNumber(loggedInUser.getPhoneNumber());
 		}
 		model.addAttribute("appointment",appointment);
->>>>>>> master
 		return "appointment";
 	}
 
@@ -226,13 +213,9 @@ public class AppController {
 		if (bindingResult.hasErrors()) {
 			return "appointment";
 		}
-		if (SecurityContextHolder.getContext().getAuthentication() != null
-				&& SecurityContextHolder.getContext().getAuthentication().isAuthenticated()
-				&& !(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken)) {
-
-			CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
-					.getPrincipal();
-//			appointment.setUser(user.getUser());
+		if (CustomUserDetails.isLoggedIn()) {
+			User user = CustomUserDetails.getCurrentUser();
+			appointment.setUser(user);
 			appointmentService.save(appointment);
 			return "redirect:/userdashboard";
 
