@@ -162,6 +162,24 @@ public class AppController {
 		return "redirect:/userdashboard";
 	}
 
+	@GetMapping("/edit_user/{id}")
+	public String showEditUserPage(@PathVariable(name = "id") long id, Model model) {;
+//		User user = userService.findById(id);
+//		user.setPassword(user.getPassword());
+//		user.setSimplePassword(user.getSimplePassword());
+		model.addAttribute("user", userService.findById(id));
+		return "edit_user";
+	}
+
+	@PostMapping("/edit_user")
+	public String updateUser(@Valid User user, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return "edit_user";
+		}
+		userService.update(user.getId(), user);
+		return "redirect:/userdashboard";
+	}
+
 	@GetMapping("/appointment")
 	public String bookAppointment(Model model) {
 			model.addAttribute("appointment", new Appointment());

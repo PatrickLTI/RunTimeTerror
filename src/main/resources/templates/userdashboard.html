@@ -11,6 +11,12 @@ body {
 	background-size: cover;
 	font-family: "Georgia", Times, serif;
 }
+.btn-primary{
+	background-color: #bf9f87 !important;
+}
+.inner, .btn-outline-light{
+	color:#edd881 !important;
+}
 </style>
 <meta charset="UTF-8">
 <title>User Dashboard</title>
@@ -24,11 +30,16 @@ body {
 		<div class="book-wrapper mb-5">
 			<div class="inner text-center mt-5 justify-content-center">
 				<p class="text-white mt-5">Xpression Kutz BARBERSHOP</p>
-				<h1 class="text-uppercase text-warning mt-5">book new
+				<h1 class="text-uppercase mt-5">book new
 					appointment</h1>
-				<a class="w3-xxxlarge btn btn-outline-warning rounded-circle px-4 py-2 mt-5"
+				<a class="w3-xxxlarge btn btn-outline-light rounded-circle border-0 px-4 py-2 mt-1"
 				   th:href="@{'/appointment/' +${#request.userPrincipal.principal.getUser().getId()}}">
 					<i class="fa-regular fa-calendar-days"></i>
+				</a>
+				<br>
+				<a class="w3-large btn btn-primary border-0 px-4 py-2 mt-5"
+				   th:href="@{'/edit_user/' +${#request.userPrincipal.principal.getUser().getId()}}">
+					Edit Profile
 				</a>
 			</div>
 		<!--    upcoming appointment-->
@@ -68,10 +79,11 @@ body {
 						<td th:text="${appoint.appTime}">
 							<p class="fw-normal mb-1">Appointment Time</p>
 						</td>
-						<td><a class="text-white btn btn-primary"
-							th:href="@{'/edit_appoint/' + ${appoint.id}}">Edit</a>&nbsp; <a
-							class="text-white btn btn-primary"
-							th:href="@{'/delete_appoint/' + ${appoint.id}}">Delete</a>
+						<td><a class="text-white btn btn-primary border-0"
+							   th:href="@{'/edit_appoint/' + ${appoint.id}}">Edit</a>&nbsp;
+							<a class="text-white btn btn-primary border-0"
+							   th:href="@{'/delete_appoint/' + ${appoint.id}}">Delete</a>
+						</td>
 					</tr>
 				</tbody>
 			</table>
