@@ -14,6 +14,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import org.apache.commons.text.WordUtils;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -70,7 +71,7 @@ public class User {
 	}
 
 	public String getFullName() {
-		return fullName;
+		return WordUtils.capitalizeFully(fullName);
 	}
 
 	public String getPhoneNumber() {

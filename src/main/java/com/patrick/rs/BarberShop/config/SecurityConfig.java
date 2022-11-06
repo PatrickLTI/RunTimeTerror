@@ -59,7 +59,7 @@ public class SecurityConfig {
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/userdashboard")
+                .defaultSuccessUrl("/userdashboard/?loggedIn")
                 .permitAll()
                 .and()
 
