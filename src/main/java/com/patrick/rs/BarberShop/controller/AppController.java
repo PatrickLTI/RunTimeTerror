@@ -18,10 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.patrick.rs.BarberShop.email.EmailSenderService;
@@ -127,7 +124,9 @@ public class AppController {
 	}
 
 	@GetMapping("/userdashboard")
-	public String showDashboard(Model model) {
+	public String showDashboard(Model model, @RequestParam(required = false) String loggedIn) {
+		if(loggedIn != null)
+			model.addAttribute("loggedIn", "Logged in Successfully!");
 
 		CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
 				.getPrincipal();
