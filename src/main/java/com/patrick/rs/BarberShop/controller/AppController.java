@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,11 +71,14 @@ public class AppController {
 	public String showPricePage() {
 		return "pricePage";
 	}
-	
-	@EventListener(ApplicationReadyEvent.class)
-	public void sendMail() {
-		senderService.sendEmail("kutzxpression@gmail.com", "this is Subject", "This is body of Email");
-	}
+
+	/* @EventListener(ApplicationReadyEvent.class) */
+
+	/*
+	 * public void sendMail() throws MessagingException {
+	 * senderService.sendEmail("kutzxpression@gmail.com", "this is Subject",
+	 * "This is body of Email"); }
+	 */
 
 	@PostMapping(value = "/registerUser")
 	public String registerUsers(@Valid User user, Errors errors, Model model, BindingResult bindingResult,
@@ -94,8 +98,10 @@ public class AppController {
 		} else {
 
 			try {
+
 				userService.create(user);
-				senderService.sendEmail(user.getEmail(), "Welcome!", "Thank you for registering with us!");
+				senderService.confirmRegistration(user.getEmail(), user.getFullName());
+
 			} catch (Exception e) {
 				if (e.getMessage() == UserService.EMAIL_TAKEN) {
 					bindingResult.addError(new FieldError("user", "email", "Email taken."));
@@ -125,7 +131,7 @@ public class AppController {
 
 	@GetMapping("/userdashboard")
 	public String showDashboard(Model model, @RequestParam(required = false) String loggedIn) {
-		if(loggedIn != null)
+		if (loggedIn != null)
 			model.addAttribute("loggedIn", "Logged in Successfully!");
 
 		CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
@@ -172,7 +178,8 @@ public class AppController {
 	}
 
 	@GetMapping("/edit_user/{id}")
-	public String showEditUserPage(@PathVariable(name = "id") long id, Model model) {;
+	public String showEditUserPage(@PathVariable(name = "id") long id, Model model) {
+		;
 //		User user = userService.findById(id);
 //		user.setPassword(user.getPassword());
 //		user.setSimplePassword(user.getSimplePassword());
@@ -190,7 +197,7 @@ public class AppController {
 	}
 
 	@GetMapping("/appointment")
-	public String showBookAppointmentByUser(Model model){
+	public String showBookAppointmentByUser(Model model) {
 		// Appointment appointment = new Appointment();
 		// appointment.setUser(userService.findById(id));
 		// appointment.setFullName(userService.findById(id).getFullName());
@@ -198,13 +205,13 @@ public class AppController {
 		// appointment.setPhoneNumber(userService.findById(id).getPhoneNumber());
 		// model.addAttribute("appointment", appointment);
 		Appointment appointment = new Appointment();
-		if(CustomUserDetails.isLoggedIn()){
+		if (CustomUserDetails.isLoggedIn()) {
 			User loggedInUser = CustomUserDetails.getCurrentUser();
 			appointment.setFullName(loggedInUser.getFullName());
 			appointment.setEmail(loggedInUser.getEmail());
 			appointment.setPhoneNumber(loggedInUser.getPhoneNumber());
 		}
-		model.addAttribute("appointment",appointment);
+		model.addAttribute("appointment", appointment);
 		return "appointment";
 	}
 
