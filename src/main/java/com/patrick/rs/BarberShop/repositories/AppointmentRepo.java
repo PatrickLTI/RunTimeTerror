@@ -16,6 +16,8 @@ public interface AppointmentRepo extends JpaRepository<Appointment, Long> {
 	public Optional<List<Appointment>> findAllByAppDate(Date date);
 
 	public void deleteAllByUserId(long userId);
+	
+	public Appointment findTopByOrderByIdDesc();
 
 //	@Query(value = "select a from Appointment a where a.appDate like %:date%", nativeQuery = true)
 //	public List<Appointment> findByDate(@Param("date") String date);

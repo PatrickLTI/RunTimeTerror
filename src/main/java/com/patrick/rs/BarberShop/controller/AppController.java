@@ -10,21 +10,21 @@ import javax.mail.MessagingException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.patrick.rs.BarberShop.email.EmailSenderService;
+import com.patrick.rs.BarberShop.email.MimeSenderService;
 import com.patrick.rs.BarberShop.model.Appointment;
 import com.patrick.rs.BarberShop.model.CustomUserDetails;
 import com.patrick.rs.BarberShop.model.User;
@@ -40,8 +40,9 @@ public class AppController {
 	@Autowired
 	private AppointmentService appointmentService;
 
+	
 	@Autowired
-	private EmailSenderService senderService;
+	private MimeSenderService mimeSenderService;
 
 	@RequestMapping("/")
 	public String showIndex() {
@@ -95,8 +96,8 @@ public class AppController {
 			try {
 
 				userService.create(user);
-				senderService.confirmRegistration(user.getEmail(), user.getFullName());
-
+				mimeSenderService.confirmRegistration(user.getEmail(), user.getFullName());
+				
 			} catch (Exception e) {
 				if (e.getMessage() == UserService.EMAIL_TAKEN) {
 					bindingResult.addError(new FieldError("user", "email", "Email taken."));
@@ -224,14 +225,28 @@ public class AppController {
 		if (CustomUserDetails.isLoggedIn()) {
 			User user = CustomUserDetails.getCurrentUser();
 			appointment.setUser(user);
-			appointmentService.save(appointment);
-			return "redirect:/userdashboard";
-
-		} else {
-			appointmentService.save(appointment);
-
-			return "appointmentbooked";
+			
 		}
+		
+			appointmentService.save(appointment);
+			try {
+				mimeSenderService.confirmAppointment(appointment.getEmail(), appointment.getFullName(), appointmentService.getLastInsertedAppId());
+			} catch (MessagingException e) {
+				e.printStackTrace();
+				return "appointment";
+			}
+			return CustomUserDetails.isLoggedIn() ? "redirect:/userdashboard" : "appointmentbooked";
+			
+			
+		
 
+	}
+	
+//	http://localhost:8081/appointment/delete/?id=8&email=la_spirou@hotmail.com
+	@GetMapping("/appointment/delete/")
+	public String deleteAppointment(@RequestParam Long id, @RequestParam String email) {
+		appointmentService.delete(id);
+		return CustomUserDetails.isLoggedIn() ? "redirect:/userdashboard" : "appointmentbooked";
+		
 	}
 }

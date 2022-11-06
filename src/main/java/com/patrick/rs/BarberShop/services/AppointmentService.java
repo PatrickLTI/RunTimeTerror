@@ -84,6 +84,10 @@ public class AppointmentService {
 	public void delete(long id) {
 		appointmentRepo.deleteById(id);
 	}
+	
+	public Long getLastInsertedAppId() {
+		return appointmentRepo.findTopByOrderByIdDesc().getId();
+	}
 
 //	public List<Appointment> findByDate(String date){
 //		return appointmentRepo.findByDate(date);
