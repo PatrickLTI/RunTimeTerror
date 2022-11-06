@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -83,4 +84,8 @@ public class AppointmentService {
 	public void delete(long id) {
 		appointmentRepo.deleteById(id);
 	}
+
+//	public List<Appointment> findByDate(String date){
+//		return appointmentRepo.findByDate(date);
+//	}
 }
