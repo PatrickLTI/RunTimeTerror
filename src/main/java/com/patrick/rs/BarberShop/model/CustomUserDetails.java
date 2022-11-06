@@ -1,7 +1,9 @@
 package com.patrick.rs.BarberShop.model;
 
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
@@ -10,6 +12,17 @@ import java.util.Date;
 import java.util.List;
 
 public class CustomUserDetails implements UserDetails {
+
+    public static boolean isLoggedIn() {
+        return SecurityContextHolder.getContext().getAuthentication() != null
+                && SecurityContextHolder.getContext().getAuthentication().isAuthenticated()
+                && !(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken);
+    }
+
+    public static User getCurrentUser() {
+        return isLoggedIn() ? ((CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser() : null;
+    }
+
     private final User user;
 
     public CustomUserDetails(User user) {

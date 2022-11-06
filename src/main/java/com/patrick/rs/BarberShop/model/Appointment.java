@@ -19,6 +19,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.apache.commons.text.WordUtils;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -67,7 +68,7 @@ public class Appointment {
 	}
 
 	public String getFullName() {
-		return fullName;
+		return WordUtils.capitalizeFully(fullName);
 	}
 
 	public Date getAppDate() {

@@ -174,7 +174,14 @@ public class AppController {
 
 	@GetMapping("/appointment")
 	public String bookAppointment(Model model) {
-		model.addAttribute("appointment", new Appointment());
+		Appointment appointment = new Appointment();
+		if(CustomUserDetails.isLoggedIn()){
+			User loggedInUser = CustomUserDetails.getCurrentUser();
+			appointment.setFullName(loggedInUser.getFullName());
+			appointment.setEmail(loggedInUser.getEmail());
+			appointment.setPhoneNumber(loggedInUser.getPhoneNumber());
+		}
+		model.addAttribute("appointment",appointment);
 		return "appointment";
 	}
 
