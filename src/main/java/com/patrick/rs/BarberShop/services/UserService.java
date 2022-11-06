@@ -78,17 +78,18 @@ public class UserService {
 
    /**
     * Updates the user
-    * @param id The id of the user in the database
+    *
+    * @param id   The id of the user in the database
     * @param user The updated user
-    * @return User
     */
-   public User update(Long id, User user) {
+   public void update(Long id, User user) throws ResponseStatusException{
        Optional<User> idEntry = userRepo.findById(id);
        if (idEntry.isEmpty()) {
            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "ID not found");
        }
+       user.setAdmin(idEntry.get().isAdmin());
        user.setId(id);
+       System.out.println("UserService-update: " + user);
        userRepo.save(user);
-       return user;
    }
 }

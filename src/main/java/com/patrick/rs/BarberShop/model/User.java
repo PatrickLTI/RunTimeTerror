@@ -39,13 +39,13 @@ public class User {
 	private String phoneNumber;
 
 	@Transient
-	@NotBlank(message = "Password should not be blank")
+//	@NotBlank(message = "Password should not be blank")
 	@Size(min = 5, max = 20, message = "Password must be between 5 - 20 characters")
 	@Column(name = "confirmPassword", nullable = false)
 	private String simplePassword;
 
 	@Transient
-	@NotBlank(message = "Password should not be blank")
+//	@NotBlank(message = "Password should not be blank")
 	@Size(min = 5, max = 20, message = "Password must be between 5 - 20 characters")
 	private String password;
 	
