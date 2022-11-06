@@ -8,7 +8,7 @@
         body {
             background-image: url("/images/dashboardBg.jpeg");
             background-repeat: no-repeat;
-            background-position: 0% 0%;
+            background-position: 0 0;
             background-size: cover;
             font-family: "Georgia", Times, serif;
 
@@ -21,10 +21,18 @@
         }
 
         .btn {
-            background-color: #b1684b !important;
             border: none !important;
             opacity: 0.8;
             color: white !important;
+        }
+        .btn:first-child {
+            background-color: #555555 !important;
+        }
+        .btn:first-child:hover {
+            background-color: #000000 !important;
+        }
+        .btn:last-child {
+            background-color: #b1684b !important;
         }
 
         button:hover {
@@ -52,14 +60,14 @@
                     <div class="mt-5 row">
                         <label for="id" class="col-3 col-form-label ms-3">User ID:</label>
                         <div class="col-8">
-                            <input type="text" th:field="*{id}" class="form-control-plaintext">
+                            <input type="text" id="id" th:field="*{id}" class="form-control-plaintext">
                         </div>
                     </div>
 
                     <div class="mt-3 row">
                         <label for="fullName" class="col-3 col-form-label ms-3">Full Name:</label>
                         <div class="col-8">
-                            <input type="text" class="form-control" th:field="*{fullName}">
+                            <input type="text" id="fullName" class="form-control" th:field="*{fullName}">
                         </div>
                         <div class="row mt-2">
                             <div class="col-4"></div>
@@ -71,7 +79,7 @@
                     <div class="mt-3 row">
                         <label for="email" class="col-3 col-form-label ms-3">Email:</label>
                         <div class="col-8">
-                            <input type="text" class="form-control" th:field="*{email}">
+                            <input type="text" id="email" class="form-control" th:field="*{email}">
                         </div>
                         <div class="row mt-2">
                             <div class="col-4"></div>
@@ -83,7 +91,7 @@
                     <div class="mt-3 row mb-5">
                         <label for="phoneNumber" class="col-3 col-form-label ms-3">Phone Number:</label>
                         <div class="col-8">
-                            <input type="text" class="form-control" th:field="*{phoneNumber}">
+                            <input type="text" class="form-control" id="phoneNumber" th:field="*{phoneNumber}">
                         </div>
                         <div class="row mt-2">
                             <div class="col-4"></div>
@@ -92,8 +100,10 @@
                                th:errors="*{phoneNumber}">
                         </div>
                     </div>
-                    <input type="password" th:field="*{password}"
-                           class="form-control" hidden/>
+                    <input type="text" th:field="*{encryptedPassword}" class="form-control" hidden/>
+                    <input type="text" th:field="*{password}" class="form-control" hidden/>
+                    <input type="text" th:field="*{simplePassword}" class="form-control" hidden/>
+                    <input type="text" th:field="*{createdAt}" class="form-control" hidden/>
 
                     <div class="m-3 text-center">
                         <a class="btn btn-primary me-2" th:href="@{/userdashboard}">Return</a>

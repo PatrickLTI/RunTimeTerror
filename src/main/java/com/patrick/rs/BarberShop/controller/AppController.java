@@ -19,7 +19,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.patrick.rs.BarberShop.email.EmailSenderService;
@@ -178,12 +180,20 @@ public class AppController {
 	}
 
 	@GetMapping("/edit_user/{id}")
+<<<<<<< HEAD
 	public String showEditUserPage(@PathVariable(name = "id") long id, Model model) {
 		;
 //		User user = userService.findById(id);
 //		user.setPassword(user.getPassword());
 //		user.setSimplePassword(user.getSimplePassword());
 		model.addAttribute("user", userService.findById(id));
+=======
+	public String showEditUserPage(@PathVariable(name = "id") long id, Model model) {;
+		User user = userService.findById(id);
+		user.setPassword("12345");
+		user.setSimplePassword("12345");
+		model.addAttribute("user", user);
+>>>>>>> ae7e56eab13208e5455a4c7004e7b7bb93908e4f
 		return "edit_user";
 	}
 
@@ -192,7 +202,12 @@ public class AppController {
 		if (bindingResult.hasErrors()) {
 			return "edit_user";
 		}
-		userService.update(user.getId(), user);
+		try {
+			userService.update(user.getId(), user);
+		} catch (ResponseStatusException e) {
+			System.out.println("ResponseStatusException thrown while updating user: " + e.getMessage());
+			throw e;
+		}
 		return "redirect:/userdashboard";
 	}
 
