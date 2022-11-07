@@ -1,14 +1,11 @@
-package com.patrick.rs.BarberShop.services;
+package com.patrick.rs.BarberShop.appointment;
 
-import com.patrick.rs.BarberShop.model.Appointment;
-import com.patrick.rs.BarberShop.repositories.AppointmentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +21,7 @@ public class AppointmentService {
 	 *
 	 * @return List<Appointment>
 	 */
-	public List<com.patrick.rs.BarberShop.model.Appointment> getAll() {
+	public List<Appointment> getAll() {
 		return appointmentRepo.findAll();
 	}
 
@@ -83,6 +80,13 @@ public class AppointmentService {
 
 	public void delete(long id) {
 		appointmentRepo.deleteById(id);
+	}
+	public void delete(long id, String email) throws ResponseStatusException {
+		Optional<Appointment> appointment = appointmentRepo.findById(id);
+		if(appointment.isPresent() && appointment.get().getEmail().equals(email))
+			appointmentRepo.deleteById(id);
+		else
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "The email you provided does not match the appointment id");
 	}
 	
 	public Long getLastInsertedAppId() {

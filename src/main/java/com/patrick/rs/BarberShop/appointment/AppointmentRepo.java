@@ -1,9 +1,6 @@
-package com.patrick.rs.BarberShop.repositories;
+package com.patrick.rs.BarberShop.appointment;
 
-import com.patrick.rs.BarberShop.model.Appointment;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import java.util.Date;
 import java.util.List;

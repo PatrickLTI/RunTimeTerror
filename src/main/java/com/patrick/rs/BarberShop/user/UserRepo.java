@@ -1,6 +1,5 @@
-package com.patrick.rs.BarberShop.repositories;
+package com.patrick.rs.BarberShop.user;
 
-import com.patrick.rs.BarberShop.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

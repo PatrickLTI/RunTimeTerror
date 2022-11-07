@@ -1,4 +1,4 @@
-package com.patrick.rs.BarberShop.model;
+package com.patrick.rs.BarberShop.user;
 
 import java.util.Date;
 import java.util.List;
@@ -14,6 +14,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.patrick.rs.BarberShop.appointment.Appointment;
 import org.apache.commons.text.WordUtils;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;

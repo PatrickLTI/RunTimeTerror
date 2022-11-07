@@ -1,4 +1,4 @@
-package com.patrick.rs.BarberShop.model;
+package com.patrick.rs.BarberShop.user;
 
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;

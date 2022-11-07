@@ -1,8 +1,5 @@
-package com.patrick.rs.BarberShop.services;
+package com.patrick.rs.BarberShop.user;
 
-import com.patrick.rs.BarberShop.repositories.UserRepo;
-import com.patrick.rs.BarberShop.model.CustomUserDetails;
-import com.patrick.rs.BarberShop.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

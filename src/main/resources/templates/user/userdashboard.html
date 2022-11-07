@@ -61,6 +61,11 @@ body {
 				role="alert" data-bs-dismiss="alert">
 				<span th:text="${appointmentDeleted}"></span>
 			</div>
+			<div th:if="${invalidAppointmentDelete}"
+				class="alert alert-success alert-dismissible screen-center hide-alert"
+				role="alert" data-bs-dismiss="alert">
+				<span th:text="${invalidAppointmentDelete}"></span>
+			</div>
 			<div class="inner text-center mt-5 justify-content-center">
 				<p class="text-white mt-5">Xpression Kutz BARBERSHOP</p>
 				<h1 class="text-uppercase mt-5">book new appointment</h1>
@@ -78,8 +83,8 @@ body {
 				<nav class="navbar bg-light rounded-top">
 					<div class="container-fluid">
 						<div class="navbar-brand fw-bold mb-1">
-							<img src="/images/logoV1.png" alt="Logo" width="30" height="30"
-								class="d-inline-block align-text-"> Upcoming Appointment
+							<img src="/images/app_logo.png" alt="Logo" width="30" height="30"
+								 class="d-inline-block align-text-"> Upcoming Appointment
 						</div>
 
 					</div>
@@ -126,8 +131,8 @@ body {
 				<nav class="navbar bg-light rounded-top">
 					<div class="container-fluid">
 						<div class="navbar-brand fw-bold mb-1" href="#">
-							<img src="/images/logoV1.png" alt="Logo" width="30" height="30"
-								class="d-inline-block align-text-"> Past Appointment
+							<img src="/images/app_logo.png" alt="Logo" width="30" height="30"
+								 class="d-inline-block align-text-"> Past Appointment
 						</div>
 					</div>
 				</nav>

@@ -1,6 +1,6 @@
 package com.patrick.rs.BarberShop.config;
 
-import com.patrick.rs.BarberShop.services.CustomUserDetailsService;
+import com.patrick.rs.BarberShop.user.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

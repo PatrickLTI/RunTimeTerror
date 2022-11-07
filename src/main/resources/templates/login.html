@@ -1,87 +1,108 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layouts/layout}">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
 <head>
 
-<style>
-body {
-	background-image: url("/images/barberToolBrush.jpg");
-	background-repeat: no-repeat;
-	background-position: 0% 0%;
-	background-size: cover;
-	font-family: "Georgia", Times, serif;
-	/* image-rendering: -webkit-optimize-contrast; */
-}
+    <style>
+        body {
+            background-image: url("/images/barberToolBrush.jpg");
+            background-repeat: no-repeat;
+            background-position: 0 0;
+            background-size: cover;
+            font-family: "Georgia", Times, serif;
+            /* image-rendering: -webkit-optimize-contrast; */
+        }
 
-form {
-	background-color: #bf9f87;
-	border-radius: 15px;
-	opacity: .9;
-}
+        form {
+            background-color: #bf9f87;
+            border-radius: 15px;
+            opacity: .9;
+        }
 
-button {
-	background-color: #d3b558 !important;
-	border: none !important;
-	opacity: 0.8;
-	color: white !important;
-}
+        button {
+            background-color: #d3b558 !important;
+            border: none !important;
+            opacity: 0.8;
+            color: white !important;
+        }
 
-button:hover {
-	opacity: 1;
-	/* 	height: 125% !important;
-	width: 25% !important; */
-}
-</style>
-<title>Registration Page</title>
+        button:hover {
+            opacity: 1;
+            /* 	height: 125% !important;
+            width: 25% !important; */
+        }
+
+        .screen-center {
+            z-index: 999;
+            position: absolute;
+            left: 50%;
+            top: 20%;
+            transform: translate(-50%, -50%);
+        }
+
+        .hide-alert {
+            width: fit-content;
+            height: auto;
+        }
+    </style>
+    <script defer>
+        setInterval(() => $('.hide-alert').addClass('d-none'), 2000)
+    </script>
+    <title>Registration Page</title>
 </head>
 
 <body>
-	<div layout:fragment="content">
+<div layout:fragment="content">
 
-		<section>
-			<div class="container">
-
-
-				<form th:action="@{/login}" th:object="${user}" method="post"
-					style="max-width: 600px; margin: 10em auto;">
-					<div th:if="${param.newUser}" class="col">
-						<div class="alert alert-success text-center">Registration successful</div>
-					</div>
-
-					<div class="m-2 row">
-
-						<label class="col-4 col-form-label" for="email">Email: </label>
-						<div class="col-12">
-							<input type="email" th:field="*{email}" class="form-control" />
-						</div>
-						<div>
-							<p class="alert alert-danger"
-								th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
-						</div>
-
-						<label class="col-4 col-form-label" for="password">Password:
-						</label>
-						<div class="col-12">
-							<input type="password" th:field="*{password}"
-								class="form-control" th:minsize="2" />
-						</div>
-						<div>
-							<p class="alert alert-danger"
-								th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
-						</div>
-
-						<div class="m-3 text-center">
-							<button type="submit" class="btn btn-primary">Login</button>
-						</div>
-					</div>
-				</form>
-			</div>
-		</section>
-	</div>
+    <section>
+        <div class="container">
+            <div th:if="${error}"
+                 class="alert alert-danger alert-dismissible screen-center hide-alert"
+                 role="alert" data-bs-dismiss="alert">
+                <span th:text="${error}"></span>
+            </div>
 
 
-	<!--boot strap javascript  -->
-	<script src="/webjars/bootstrap/5.2.2/js/bootstrap.bundle.js"></script>
+            <form th:action="@{/login}" th:object="${user}" method="post"
+                  style="max-width: 600px; margin: 10em auto;">
+                <div th:if="${param.newUser}" class="col">
+                    <div class="alert alert-success text-center">Registration successful</div>
+                </div>
+
+                <div class="m-2 row">
+
+                    <label class="col-4 col-form-label" for="email">Email: </label>
+                    <div class="col-12">
+                        <input type="email" th:field="*{email}" id="email" class="form-control"/>
+                    </div>
+                    <div>
+                        <p class="alert alert-danger"
+                           th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+                    </div>
+
+                    <label class="col-4 col-form-label" for="password">Password:
+                    </label>
+                    <div class="col-12">
+                        <input type="password" th:field="*{password}" id="password"
+                               class="form-control" th:minsize="2"/>
+                    </div>
+                    <div>
+                        <p class="alert alert-danger"
+                           th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
+                    </div>
+
+                    <div class="m-3 text-center">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+
+
+<!--boot strap javascript  -->
+<script src="/webjars/bootstrap/5.2.2/js/bootstrap.bundle.js"></script>
 </body>
 </html>
