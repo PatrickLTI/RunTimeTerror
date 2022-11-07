@@ -92,7 +92,11 @@
                                th:errors="*{phoneNumber}">
                         </div>
                     </div>
-                    <input type="password" th:field="*{password}"
+                    <input type="password" th:field="*{encryptedPassword}"
+                           class="form-control" hidden/>
+                    <input type="date" th:field="*{createdAt}"
+                           class="form-control" hidden/>
+                    <input type="" th:field="*{isAdmin}"
                            class="form-control" hidden/>
 
                     <div class="m-3 text-center">
