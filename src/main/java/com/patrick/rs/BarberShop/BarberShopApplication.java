@@ -17,7 +17,7 @@ public class BarberShopApplication {
 	
 	/*
 	 * ClassPathResource testImage = new ClassPathResource("images/app_logo.png");
-	 * System.out.println(testImage.exists());
+	 * 
 	 */
 
 	

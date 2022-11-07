@@ -49,45 +49,45 @@ public class AppointmentController {
 
 	@GetMapping("/appointment")
 	public String showBookAppointmentByUser(Model model) {
-		System.out.println("Get appointment");
+		
 		Appointment appointment = new Appointment();
 		if (CustomUserDetails.isLoggedIn()) {
-			System.out.println("here1");
+			
 			User loggedInUser = CustomUserDetails.getCurrentUser();
 			appointment.setFullName(loggedInUser.getFullName());
 			appointment.setEmail(loggedInUser.getEmail());
 			appointment.setPhoneNumber(loggedInUser.getPhoneNumber());
 		}
-		System.out.println("here1");
+		
 		model.addAttribute("appointment", appointment);
 		return "appointment/appointment";
 	}
 
 	@PostMapping("/appointment")
 	public String submitForm(@Valid Appointment appointment, BindingResult bindingResult, Model model) {
-		System.out.println("post appointment");
+		
 		if (bindingResult.hasErrors()) {
-			System.out.println("here1");
+			
 			return "appointment/appointment";
 		}
 		if (CustomUserDetails.isLoggedIn()) {
-			System.out.println("here2");
+			
 			User user = CustomUserDetails.getCurrentUser();
 			appointment.setUser(user);
 		}
-		System.out.println("here3");
+		
 		appointmentService.save(appointment);
-		System.out.println("here4");
+		
 		try {
-			System.out.println("here5");
+			
 			mimeSenderService.confirmAppointment(appointment.getEmail(), appointment.getFullName(),
 					appointmentService.getLastInsertedAppId());
 		} catch (MessagingException e) {
-			System.out.println("here6");
+			
 			e.printStackTrace();
 			return "appointment/appointment";
 		}
-		System.out.println("here7");
+		
 		return CustomUserDetails.isLoggedIn() ? "redirect:/userdashboard?successfulAppointment"
 				: "redirect:/?successfulAppointment";
 

@@ -87,7 +87,7 @@ public class UserService {
        }
        user.setAdmin(idEntry.get().isAdmin());
        user.setId(id);
-       System.out.println("UserService-update: " + user);
+       
        userRepo.save(user);
    }
 }

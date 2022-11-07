@@ -97,7 +97,7 @@ public class UserController {
 		try {
 			userService.update(user.getId(), user);
 		} catch (ResponseStatusException e) {
-			System.out.println("ResponseStatusException thrown while updating user: " + e.getMessage());
+			
 			throw e;
 		}
 		return "redirect:/userdashboard";
