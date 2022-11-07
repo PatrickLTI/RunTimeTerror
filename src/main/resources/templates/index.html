@@ -1,86 +1,111 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout}">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
 
 
 <head>
-    <style>
-        body {
-            background-image: url("/images/indexImage.jpg");
-            background-repeat: no-repeat;
-            background-position: 0 0;
-            background-size: cover;
-            font-family: "Georgia", Times, serif;
-        }
+<style>
+body {
+	background-image: url("/images/indexImage.jpg");
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	background-size: cover;
+	font-family: "Georgia", Times, serif;
+}
 
-        .container img {
-            width: 100%;
-            height: auto;
-        }
-    </style>
-    <title>Home</title>
+.container img {
+	width: 100%;
+	height: auto;
+}
+
+.screen-center {
+	z-index: 999;
+	position: absolute;
+	left: 50%;
+	top: 188px;
+	transform: translate(-50%, -50%);
+}
+
+.hide-alert {
+	width: fit-content;
+	height: auto;
+}
+</style>
+<script defer>
+    setInterval(() => $('.hide-alert').addClass('d-none'), 2000)
+</script>
+<title>Home</title>
 </head>
 <body>
-<div layout:fragment="content">
+	<div layout:fragment="content">
 
-    <section class="container mt-5 text-white">
+		<section class="container mt-5 text-white">
+			<div th:if="${successfulAppointment}"
+				class="alert alert-success alert-dismissible screen-center hide-alert"
+				role="alert" data-bs-dismiss="alert">
+				<span th:text="${successfulAppointment}"></span>
+			</div>
+			<div th:if="${appointmentDeleted}"
+				class="alert alert-success alert-dismissible screen-center hide-alert"
+				role="alert" data-bs-dismiss="alert">
+				<span th:text="${appointmentDeleted}"></span>
+			</div>
+			<div class="row my-5 bg-dark bg-opacity-75">
+				<div class="col-5 p-3 my-auto">
+					<img src="/images/index/team.png" alt="Image of the team">
+				</div>
+				<div class="col-7 p-3">
+					<p>Why is it that when one man builds a wall, the next man
+						immediately needs to know what's on the other side?</p>
+					<p>Winter is coming.</p>
+					<p>... a mind needs books as a sword needs a whetstone, if it
+						is to keep its edge.</p>
+					<p>Why is it that when one man builds a wall, the next man
+						immediately needs to know what's on the other side?</p>
+					<p>Winter is coming.</p>
+					<p>... a mind needs books as a sword needs a whetstone, if it
+						is to keep its edge.</p>
+				</div>
+			</div>
 
-        <div class="row my-5 bg-dark bg-opacity-75">
-            <div class="col-5 p-3 my-auto">
-                <img src="/images/index/team.png" alt="Image of the team">
-            </div>
-            <div class="col-7 p-3">
-                <p>Why is it that when one man builds a wall, the next man
-                    immediately needs to know what's on the other side?</p>
-                <p>Winter is coming.</p>
-                <p>... a mind needs books as a sword needs a whetstone, if it
-                    is to keep its edge.</p>
-                <p>Why is it that when one man builds a wall, the next man
-                    immediately needs to know what's on the other side?</p>
-                <p>Winter is coming.</p>
-                <p>... a mind needs books as a sword needs a whetstone, if it
-                    is to keep its edge.</p>
-            </div>
-        </div>
-
-        <div class="row d-flex flex-row-reverse my-5 bg-dark bg-opacity-75">
-            <div class="col-5 p-3 my-auto">
-                <img src="/images/index/image2.jpg" alt="Image of the team">
-            </div>
-            <div class="col-7 p-3">
-                <p>Why is it that when one man builds a wall, the next man
-                    immediately needs to know what's on the other side?</p>
-                <p>Winter is coming.</p>
-                <p>... a mind needs books as a sword needs a whetstone, if it
-                    is to keep its edge.</p>
-                <p>Why is it that when one man builds a wall, the next man
-                    immediately needs to know what's on the other side?</p>
-                <p>Winter is coming.</p>
-                <p>... a mind needs books as a sword needs a whetstone, if it
-                    is to keep its edge.</p>
-            </div>
-        </div>
+			<div class="row d-flex flex-row-reverse my-5 bg-dark bg-opacity-75">
+				<div class="col-5 p-3 my-auto">
+					<img src="/images/index/image2.jpg" alt="Image of the team">
+				</div>
+				<div class="col-7 p-3">
+					<p>Why is it that when one man builds a wall, the next man
+						immediately needs to know what's on the other side?</p>
+					<p>Winter is coming.</p>
+					<p>... a mind needs books as a sword needs a whetstone, if it
+						is to keep its edge.</p>
+					<p>Why is it that when one man builds a wall, the next man
+						immediately needs to know what's on the other side?</p>
+					<p>Winter is coming.</p>
+					<p>... a mind needs books as a sword needs a whetstone, if it
+						is to keep its edge.</p>
+				</div>
+			</div>
 
 
-        <div class="row my-5 bg-dark bg-opacity-75">
-            <div class="col-5 p-3 my-auto">
-                <img src="/images/index/image1.jpg" alt="Image of the team">
-            </div>
-            <div class="col-7 p-3">
-                <p>Why is it that when one man builds a wall, the next man
-                    immediately needs to know what's on the other side?</p>
-                <p>Winter is coming.</p>
-                <p>... a mind needs books as a sword needs a whetstone, if it
-                    is to keep its edge.</p>
-                <p>Why is it that when one man builds a wall, the next man
-                    immediately needs to know what's on the other side?</p>
-                <p>Winter is coming.</p>
-                <p>... a mind needs books as a sword needs a whetstone, if it
-                    is to keep its edge.</p>
-            </div>
-        </div>
-    </section>
-</div>
+			<div class="row my-5 bg-dark bg-opacity-75">
+				<div class="col-5 p-3 my-auto">
+					<img src="/images/index/image1.jpg" alt="Image of the team">
+				</div>
+				<div class="col-7 p-3">
+					<p>Why is it that when one man builds a wall, the next man
+						immediately needs to know what's on the other side?</p>
+					<p>Winter is coming.</p>
+					<p>... a mind needs books as a sword needs a whetstone, if it
+						is to keep its edge.</p>
+					<p>Why is it that when one man builds a wall, the next man
+						immediately needs to know what's on the other side?</p>
+					<p>Winter is coming.</p>
+					<p>... a mind needs books as a sword needs a whetstone, if it
+						is to keep its edge.</p>
+				</div>
+			</div>
+		</section>
+	</div>
 </body>
 </html>

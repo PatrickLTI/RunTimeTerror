@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout}">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
 <head>
 <style>
 body {
@@ -11,26 +11,29 @@ body {
 	background-size: cover;
 	font-family: "Georgia", Times, serif;
 }
-.btn-primary{
+
+.btn-primary {
 	background-color: #bf9f87 !important;
 }
-.inner, .btn-outline-light{
+
+.inner, .btn-outline-light {
 	color: #edd881 !important;
 }
+
 .screen-center {
-    z-index: 999;
-    position: absolute;
-    left: 50%;
-    top: 188px;
-    transform: translate(-50%, -50%);
+	z-index: 999;
+	position: absolute;
+	left: 50%;
+	top: 188px;
+	transform: translate(-50%, -50%);
 }
 
 .hide-alert {
-    width:fit-content;
-    height:auto;
+	width: fit-content;
+	height: auto;
 }
 </style>
-<script delay>
+<script defer>
     setInterval(() => $('.hide-alert').addClass('d-none'), 2000)
 </script>
 <meta charset="UTF-8">
@@ -43,116 +46,122 @@ body {
 <body>
 	<div layout:fragment="content" class="container">
 		<div class="book-wrapper mb-5">
-            <div th:if="${loggedIn}" class="alert alert-success alert-dismissible screen-center hide-alert" role="alert" data-bs-dismiss="alert">
-                    <span th:text="${loggedIn}"></span>
-            </div>
+			<div th:if="${loggedIn}"
+				class="alert alert-success alert-dismissible screen-center hide-alert"
+				role="alert" data-bs-dismiss="alert">
+				<span th:text="${loggedIn}"></span>
+			</div>
+			<div th:if="${successfulAppointment}"
+				class="alert alert-success alert-dismissible screen-center hide-alert"
+				role="alert" data-bs-dismiss="alert">
+				<span th:text="${successfulAppointment}"></span>
+			</div>
+			<div th:if="${appointmentDeleted}"
+				class="alert alert-success alert-dismissible screen-center hide-alert"
+				role="alert" data-bs-dismiss="alert">
+				<span th:text="${appointmentDeleted}"></span>
+			</div>
 			<div class="inner text-center mt-5 justify-content-center">
 				<p class="text-white mt-5">Xpression Kutz BARBERSHOP</p>
-				<h1 class="text-uppercase mt-5">book new
-					appointment</h1>
-				<a class="w3-xxxlarge btn btn-outline-light rounded-circle border-0 px-4 py-2 mt-1"
-				   th:href="@{'/appointment'}">
-					<i class="fa-regular fa-calendar-days"></i>
-				</a>
-				<br>
-				<a class="w3-large btn btn-primary border-0 px-4 py-2 mt-5"
-				   th:href="@{'/edit_user/' +${#request.userPrincipal.principal.getUser().getId()}}">
-					Edit Profile
-				</a>
+				<h1 class="text-uppercase mt-5">book new appointment</h1>
+				<a
+					class="w3-xxxlarge btn btn-outline-light rounded-circle border-0 px-4 py-2 mt-1"
+					th:href="@{'/appointment'}"> <i
+					class="fa-regular fa-calendar-days"></i>
+				</a> <br> <a
+					class="w3-large btn btn-primary border-0 px-4 py-2 mt-5"
+					th:href="@{'/edit_user/' +${#request.userPrincipal.principal.getUser().getId()}}">
+					Edit Profile </a>
 			</div>
-		<!--    upcoming appointment-->
-		<div class="mt-5 rounded">
-			<nav class="navbar bg-light rounded-top">
-				<div class="container-fluid">
-					<div class="navbar-brand fw-bold mb-1"> <img
-						src="/images/logoV1.png" alt="Logo" width="30" height="30"
-						class="d-inline-block align-text-"> Upcoming Appointment
-					</div>
-<!--					<div>-->
-<!--						<form th:action="@{/search}" class="d-flex" role="search">-->
-<!--							<input class="form-control me-2" type="date" name="date">-->
-<!--							<button type="submit" class="btn btn-outline-success">Search</button>-->
-<!--						</form>-->
-<!--					</div>-->
-				</div>
-			</nav>
-			<table
-				class="table align-middle text-center mb-0 bg-white rounded-top">
-				<thead class="bg-light">
-					<tr>
-						<th>Client Name</th>
-						<th>Appointment ID</th>
-						<th>Appointment Date</th>
-						<th>Appointment Time</th>
-						<th>Actions</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="appoint:${listAppoints}" th:if="${appoint.getAppDate().getTime() > T(java.lang.System).currentTimeMillis()}">
-						<td th:text="${appoint.fullName}">
-							<div class="d-flex align-items-center">
-								<p class="fw-bold mb-1">Client Name</p>
-							</div>
-						</td>
-						<td th:text="${appoint.id}">
-							<p class="fw-normal mb-1">Appointment ID</p>
-						</td>
-						<td th:text="${appoint.appDate.toString().substring(0, 10)}">
-							<p class="fw-normal mb-1">Appointment Date</p>
-						</td>
-						<td th:text="${appoint.appTime}">
-							<p class="fw-normal mb-1">Appointment Time</p>
-						</td>
-						<td><a class="text-white btn btn-primary border-0"
-							   th:href="@{'/edit_appoint/' + ${appoint.id}}">Edit</a>&nbsp;
-							<a class="text-white btn btn-primary border-0"
-							   th:href="@{'/delete_appoint/' + ${appoint.id}}">Delete</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+			<!--    upcoming appointment-->
+			<div class="mt-5 rounded">
+				<nav class="navbar bg-light rounded-top">
+					<div class="container-fluid">
+						<div class="navbar-brand fw-bold mb-1">
+							<img src="/images/logoV1.png" alt="Logo" width="30" height="30"
+								class="d-inline-block align-text-"> Upcoming Appointment
+						</div>
 
-		<!--    past appointment-->
-		<div class="mt-5 rounded" >
-			<nav class="navbar bg-light rounded-top">
-				<div class="container-fluid">
-					<div class="navbar-brand fw-bold mb-1" href="#"> <img
-						src="/images/logoV1.png" alt="Logo" width="30" height="30"
-						class="d-inline-block align-text-"> Past Appointment
 					</div>
-				</div>
-			</nav>
-			<table
-				class="table align-middle text-center mb-0 bg-white rounded-top">
-				<thead class="bg-light">
-					<tr>
-						<th>Client Name</th>
-						<th>Appointment ID</th>
-						<th>Appointment Date</th>
-						<th>Appointment Time</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="pastAppoint:${listPastAppoints}"
-						th:if="${pastAppoint.getAppDate().getTime() < T(java.lang.System).currentTimeMillis()}">
-						<td th:text="${pastAppoint.fullName}">
-							<div class="d-flex align-items-center">
-								<p class="fw-bold mb-1">Client Name</p>
-							</div>
-						</td>
-						<td th:text="${pastAppoint.id}">
-							<p class="fw-normal mb-1">Appointment ID</p>
-						</td>
-						<td th:text="${pastAppoint.appDate.toString().substring(0, 10)}">
-							<p class="fw-normal mb-1">Appointment Date</p>
-						</td>
-						<td th:text="${pastAppoint.appTime}">
-							<p class="fw-normal mb-1">Appointment Time</p>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+				</nav>
+				<table
+					class="table align-middle text-center mb-0 bg-white rounded-top">
+					<thead class="bg-light">
+						<tr>
+							<th>Client Name</th>
+							<th>Appointment ID</th>
+							<th>Appointment Date</th>
+							<th>Appointment Time</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="appoint:${listAppoints}"
+							th:if="${appoint.getAppDate().getTime() > T(java.lang.System).currentTimeMillis()}">
+							<td th:text="${appoint.fullName}">
+								<div class="d-flex align-items-center">
+									<p class="fw-bold mb-1">Client Name</p>
+								</div>
+							</td>
+							<td th:text="${appoint.id}">
+								<p class="fw-normal mb-1">Appointment ID</p>
+							</td>
+							<td th:text="${appoint.appDate.toString().substring(0, 10)}">
+								<p class="fw-normal mb-1">Appointment Date</p>
+							</td>
+							<td th:text="${appoint.appTime}">
+								<p class="fw-normal mb-1">Appointment Time</p>
+							</td>
+							<td><a class="text-white btn btn-primary border-0"
+								th:href="@{'/edit_appoint/' + ${appoint.id}}">Edit</a>&nbsp; <a
+								class="text-white btn btn-primary border-0"
+								th:href="@{'/delete_appoint/' + ${appoint.id}}">Delete</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<!--    past appointment-->
+			<div class="mt-5 rounded">
+				<nav class="navbar bg-light rounded-top">
+					<div class="container-fluid">
+						<div class="navbar-brand fw-bold mb-1" href="#">
+							<img src="/images/logoV1.png" alt="Logo" width="30" height="30"
+								class="d-inline-block align-text-"> Past Appointment
+						</div>
+					</div>
+				</nav>
+				<table
+					class="table align-middle text-center mb-0 bg-white rounded-top">
+					<thead class="bg-light">
+						<tr>
+							<th>Client Name</th>
+							<th>Appointment ID</th>
+							<th>Appointment Date</th>
+							<th>Appointment Time</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="pastAppoint:${listPastAppoints}"
+							th:if="${pastAppoint.getAppDate().getTime() < T(java.lang.System).currentTimeMillis()}">
+							<td th:text="${pastAppoint.fullName}">
+								<div class="d-flex align-items-center">
+									<p class="fw-bold mb-1">Client Name</p>
+								</div>
+							</td>
+							<td th:text="${pastAppoint.id}">
+								<p class="fw-normal mb-1">Appointment ID</p>
+							</td>
+							<td th:text="${pastAppoint.appDate.toString().substring(0, 10)}">
+								<p class="fw-normal mb-1">Appointment Date</p>
+							</td>
+							<td th:text="${pastAppoint.appTime}">
+								<p class="fw-normal mb-1">Appointment Time</p>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 </body>

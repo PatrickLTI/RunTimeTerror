@@ -40,12 +40,15 @@ public class AppController {
 	@Autowired
 	private AppointmentService appointmentService;
 
-	
 	@Autowired
 	private MimeSenderService mimeSenderService;
 
 	@RequestMapping("/")
-	public String showIndex() {
+	public String showIndex(Model model, @RequestParam(required = false) String successfulAppointment, @RequestParam(required = false) String appointmentDeleted) {
+		if (successfulAppointment != null)
+			model.addAttribute("successfulAppointment", "Successfully registered an apointment!");
+		if (appointmentDeleted != null)
+			model.addAttribute("appointmentDeleted", "Successfully deleted your apointment!");
 		return "index";
 	}
 
@@ -75,7 +78,6 @@ public class AppController {
 		return "pricePage";
 	}
 
-
 	@PostMapping(value = "/registerUser")
 	public String registerUsers(@Valid User user, Errors errors, Model model, BindingResult bindingResult,
 			RedirectAttributes redirectAttributes) {
@@ -97,7 +99,7 @@ public class AppController {
 
 				userService.create(user);
 				mimeSenderService.confirmRegistration(user.getEmail(), user.getFullName());
-				
+
 			} catch (Exception e) {
 				if (e.getMessage() == UserService.EMAIL_TAKEN) {
 					bindingResult.addError(new FieldError("user", "email", "Email taken."));
@@ -126,10 +128,14 @@ public class AppController {
 	}
 
 	@GetMapping("/userdashboard")
-	public String showDashboard(Model model, @RequestParam(required = false) String loggedIn) {
+	public String showDashboard(Model model, @RequestParam(required = false) String loggedIn,
+			@RequestParam(required = false) String successfulAppointment, @RequestParam(required = false) String appointmentDeleted) {
 		if (loggedIn != null)
 			model.addAttribute("loggedIn", "Logged in Successfully!");
-
+		if (successfulAppointment != null)
+			model.addAttribute("successfulAppointment", "Successfully registered an apointment!");
+		if (appointmentDeleted != null)
+			model.addAttribute("appointmentDeleted", "Successfully deleted your apointment!");
 		CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
 				.getPrincipal();
 
@@ -170,12 +176,13 @@ public class AppController {
 	@GetMapping("/delete_appoint/{id}")
 	public String deleteAppointment(@PathVariable(name = "id") long id) {
 		appointmentService.delete(id);
-		return "redirect:/userdashboard";
+		return "redirect:/userdashboard?appointmentDeleted";
 	}
 
 	@GetMapping("/edit_user/{id}")
 
-	public String showEditUserPage(@PathVariable(name = "id") long id, Model model) {;
+	public String showEditUserPage(@PathVariable(name = "id") long id, Model model) {
+		;
 		User user = userService.findById(id);
 		user.setPassword("12345");
 		user.setSimplePassword("12345");
@@ -200,12 +207,7 @@ public class AppController {
 
 	@GetMapping("/appointment")
 	public String showBookAppointmentByUser(Model model) {
-		// Appointment appointment = new Appointment();
-		// appointment.setUser(userService.findById(id));
-		// appointment.setFullName(userService.findById(id).getFullName());
-		// appointment.setEmail(userService.findById(id).getEmail());
-		// appointment.setPhoneNumber(userService.findById(id).getPhoneNumber());
-		// model.addAttribute("appointment", appointment);
+
 		Appointment appointment = new Appointment();
 		if (CustomUserDetails.isLoggedIn()) {
 			User loggedInUser = CustomUserDetails.getCurrentUser();
@@ -220,33 +222,33 @@ public class AppController {
 	@PostMapping("/appointment")
 	public String submitForm(@Valid Appointment appointment, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
+
 			return "appointment";
 		}
 		if (CustomUserDetails.isLoggedIn()) {
 			User user = CustomUserDetails.getCurrentUser();
 			appointment.setUser(user);
-			
+
 		}
-		
-			appointmentService.save(appointment);
-			try {
-				mimeSenderService.confirmAppointment(appointment.getEmail(), appointment.getFullName(), appointmentService.getLastInsertedAppId());
-			} catch (MessagingException e) {
-				e.printStackTrace();
-				return "appointment";
-			}
-			return CustomUserDetails.isLoggedIn() ? "redirect:/userdashboard" : "appointmentbooked";
-			
-			
-		
+
+		appointmentService.save(appointment);
+		try {
+			mimeSenderService.confirmAppointment(appointment.getEmail(), appointment.getFullName(),
+					appointmentService.getLastInsertedAppId());
+		} catch (MessagingException e) {
+			e.printStackTrace();
+			return "appointment";
+		}
+		return CustomUserDetails.isLoggedIn() ? "redirect:/userdashboard?successfulAppointment"
+				: "redirect:/?successfulAppointment";
 
 	}
-	
-//	http://localhost:8081/appointment/delete/?id=8&email=la_spirou@hotmail.com
+
 	@GetMapping("/appointment/delete/")
 	public String deleteAppointment(@RequestParam Long id, @RequestParam String email) {
 		appointmentService.delete(id);
-		return CustomUserDetails.isLoggedIn() ? "redirect:/userdashboard" : "appointmentbooked";
-		
+		return CustomUserDetails.isLoggedIn() ? "redirect:/userdashboard?appointmentDeleted"
+				: "redirect:/?appointmentDeleted";
+
 	}
 }
